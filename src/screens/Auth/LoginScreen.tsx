@@ -12,6 +12,7 @@ import {
 
 const LoginScreen = () => {
   const theme = useColorScheme();
+
   return (
     <CustomSafeAreaView>
       <View style={styles.container}>
