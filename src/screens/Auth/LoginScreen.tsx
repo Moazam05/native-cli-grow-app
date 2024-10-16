@@ -18,7 +18,7 @@ import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const LoginScreen = () => {
   const theme = useColorScheme();
-  const navigation = useNavigation();
+  const navigation: any = useNavigation();
 
   const signInWithGoogle = async () => {
     try {
@@ -66,7 +66,9 @@ const LoginScreen = () => {
 
         <TouchableText
           firstText="Use other email ID"
-          onPress={() => {}}
+          onPress={() => {
+            navigation.navigate('EmailScreen');
+          }}
           style={styles.touchText}
         />
 
