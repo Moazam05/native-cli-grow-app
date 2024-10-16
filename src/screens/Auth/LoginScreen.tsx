@@ -14,10 +14,23 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import TouchableText from '../../components/TouchableText';
 import {useNavigation} from '@react-navigation/native';
 import BottomText from '../../components/BottomText';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const LoginScreen = () => {
   const theme = useColorScheme();
   const navigation = useNavigation();
+
+  const signInWithGoogle = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      GoogleSignin.signOut();
+      const {idToken} = await GoogleSignin.signIn();
+      console.log(idToken);
+      // navigation.navigate('Home');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <CustomSafeAreaView>
@@ -41,13 +54,15 @@ const LoginScreen = () => {
         <SocialLoginButton
           icon={<Image source={Images.GoogleIcon} style={styles.gimg} />}
           text="Continue with Google"
-          onPress={async () => {}}
+          onPress={async () => {
+            signInWithGoogle();
+          }}
         />
-        <SocialLoginButton
+        {/* <SocialLoginButton
           icon={<Icon name="logo-apple" size={18} color="black" />}
           text="Continue with Apple"
           onPress={async () => {}}
-        />
+        /> */}
 
         <TouchableText
           firstText="Use other email ID"
