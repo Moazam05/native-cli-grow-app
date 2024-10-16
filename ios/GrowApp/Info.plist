@@ -27,7 +27,8 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>116385274952-42f2jfnc850oqcfqkcsqg0o1s0nq8jk7.apps.googleusercontent.com</string>
+			<!-- Reverse Client ID -->
+				<string>com.googleusercontent.apps.116385274952-42f2jfnc850oqcfqkcsqg0o1s0nq8jk7</string>
 			</array>
 		</dict>
 	</array>
