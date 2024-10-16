@@ -9,6 +9,8 @@ import {
   screenHeight,
   screenWidth,
 } from '../../utils/Scaling';
+import SocialLoginButton from '../../components/SocialLoginButton';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const LoginScreen = () => {
   const theme = useColorScheme();
@@ -31,6 +33,17 @@ const LoginScreen = () => {
             }
           />
         </View>
+
+        <SocialLoginButton
+          icon={<Image source={Images.GoogleIcon} style={styles.gimg} />}
+          text="Continue with Google"
+          onPress={async () => {}}
+        />
+        <SocialLoginButton
+          icon={<Icon name="logo-apple" size={18} color="black" />}
+          text="Continue with Apple"
+          onPress={async () => {}}
+        />
       </View>
     </CustomSafeAreaView>
   );
@@ -57,5 +70,9 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     resizeMode: 'contain',
+  },
+  gimg: {
+    height: 20,
+    width: 20,
   },
 });
