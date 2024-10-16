@@ -1,10 +1,8 @@
 import React from 'react';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeScreen from '../screens/Home/HomeScreen';
-import LoginScreen from '../screens/Auth/LoginScreen';
 import {useCustomTheme} from '../themes/Theme';
-import EmailScreen from '../screens/Auth/EmailScreen';
+import {mergedStacks} from './ScreenCollections';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,9 +28,15 @@ const Navigation = () => {
         screenOptions={{
           headerShown: false,
         }}>
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="EmailScreen" component={EmailScreen} />
+        {mergedStacks.map((item, index) => {
+          return (
+            <Stack.Screen
+              key={index}
+              name={item.name}
+              component={item.component}
+            />
+          );
+        })}
       </Stack.Navigator>
     </NavigationContainer>
   );
