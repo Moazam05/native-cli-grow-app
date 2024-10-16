@@ -56,7 +56,7 @@ const CustomButton: FC<CustomButtonProps> = ({
         {
           backgroundColor:
             loading || disabled
-              ? theme == 'dark'
+              ? theme === 'dark'
                 ? colors.card
                 : '#DFDFDF'
               : colorw.profit,
