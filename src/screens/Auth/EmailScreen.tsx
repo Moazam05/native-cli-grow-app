@@ -1,17 +1,42 @@
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView, StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 import CustomSafeAreaView from '../../components/CustomSafeAreaView';
 import BackButton from '../../components/BackButton';
 import CenteredLogo from './components/CenteredLogo';
 import CustomInput from '../../components/CustomInput';
-import CustomText from '../../components/CustomText';
-import {RFValue} from 'react-native-responsive-fontsize';
-import TouchableText from '../../components/TouchableText';
 import CustomButton from '../../components/CustomButton';
+import {useNavigation} from '@react-navigation/native';
+
+const validateEmail = (email: string) => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+};
 
 const EmailScreen = () => {
-  const [loading, setLoading] = useState(false);
+  const navigation: any = useNavigation();
 
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
+
+  const validate = () => {
+    if (!validateEmail(email)) {
+      setEmailError('Please enter a valid email address');
+      return false;
+    }
+    return true;
+  };
+
+  const handleOnSubmit = async () => {
+    setLoading(true);
+    setTimeout(() => {
+      if (validate()) {
+        //
+        navigation.navigate('EmailOtpScreen', {email});
+      }
+      setLoading(false);
+    }, 2000);
+  };
   return (
     <CustomSafeAreaView>
       <BackButton path="LoginScreen" />
@@ -21,61 +46,43 @@ const EmailScreen = () => {
         <CustomInput
           label="EMAIL ADDRESS"
           returnKeyType="done"
+          value={email}
+          inputMode="email"
+          focusable={true}
+          autoFocus={true}
+          error={emailError}
+          onEndEditing={() => validate()}
+          onChangeText={text => {
+            setEmail(text);
+            setEmailError('');
+          }}
           placeholder="Eg: me@gmail.com"
-          onSubmitEditing={() => {}}
+          onSubmitEditing={handleOnSubmit}
         />
+      </ScrollView>
 
-        <CustomInput
-          label="ENTER PASSWORD"
-          returnKeyType="done"
-          placeholder="8-20 Characters"
-          onSubmitEditing={() => {}}
-          password
-        />
-
-        <CustomInput
-          label=""
-          placeholder="Enter OTP"
-          onSubmitEditing={() => {}}
-          keyboardType="number-pad"
-          rightIcon={
-            <CustomText
-              style={{
-                fontSize: RFValue(9),
-              }}>
-              Resend in 25s
-            </CustomText>
-          }
-        />
-
-        <CustomInput
-          label="ENTER OTP SEND TO THIS EMAIL ID"
-          placeholder="Enter OTP"
-          onSubmitEditing={() => {}}
-          keyboardType="number-pad"
-          rightIcon={
-            <TouchableText
-              onPress={() => {}}
-              firstText="Resend in 25s"
-              style={{
-                fontSize: RFValue(9),
-                marginTop: 0,
-              }}
-            />
-          }
-        />
-
+      <View style={styles.bottomBtn}>
         <CustomButton
           text="NEXT"
           loading={loading}
-          disabled={loading}
+          disabled={!validateEmail(email) || loading}
           onPress={() => {
-            setLoading(true);
+            handleOnSubmit();
           }}
         />
-      </ScrollView>
+      </View>
     </CustomSafeAreaView>
   );
 };
 
 export default EmailScreen;
+
+const styles = StyleSheet.create({
+  bottomBtn: {
+    position: 'absolute',
+    bottom: 10,
+    width: '100%',
+    right: 0,
+    left: 20,
+  },
+});
