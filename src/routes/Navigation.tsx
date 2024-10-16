@@ -25,7 +25,7 @@ const Navigation = () => {
   return (
     <NavigationContainer theme={MyTheme}>
       <Stack.Navigator
-        initialRouteName="BottomTabBar"
+        initialRouteName="LoginScreen"
         screenOptions={{
           headerShown: false,
         }}>
