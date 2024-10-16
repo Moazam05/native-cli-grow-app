@@ -14,13 +14,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import TouchableText from '../../components/TouchableText';
 import {useNavigation} from '@react-navigation/native';
 import BottomText from '../../components/BottomText';
-import {GOOGLE_WEB_CLIENT_ID} from '@env';
 
 const LoginScreen = () => {
   const theme = useColorScheme();
   const navigation = useNavigation();
-
-  console.log('GOOGLE_WEB_CLIENT_ID', GOOGLE_WEB_CLIENT_ID);
 
   return (
     <CustomSafeAreaView>
