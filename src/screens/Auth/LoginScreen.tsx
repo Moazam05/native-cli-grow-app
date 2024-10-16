@@ -11,9 +11,13 @@ import {
 } from '../../utils/Scaling';
 import SocialLoginButton from '../../components/SocialLoginButton';
 import Icon from 'react-native-vector-icons/Ionicons';
+import TouchableText from '../../components/TouchableText';
+import {useNavigation} from '@react-navigation/native';
+import BottomText from '../../components/BottomText';
 
 const LoginScreen = () => {
   const theme = useColorScheme();
+  const navigation = useNavigation();
 
   return (
     <CustomSafeAreaView>
@@ -44,6 +48,14 @@ const LoginScreen = () => {
           text="Continue with Apple"
           onPress={async () => {}}
         />
+
+        <TouchableText
+          firstText="Use other email ID"
+          onPress={() => {}}
+          style={styles.touchText}
+        />
+
+        <BottomText />
       </View>
     </CustomSafeAreaView>
   );
@@ -74,5 +86,9 @@ const styles = StyleSheet.create({
   gimg: {
     height: 20,
     width: 20,
+  },
+  touchText: {
+    marginVertical: 30,
+    marginTop: 15,
   },
 });
