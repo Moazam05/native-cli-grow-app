@@ -20,6 +20,21 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+
+	<!-- Google Sign Setup Here -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>116385274952-42f2jfnc850oqcfqkcsqg0o1s0nq8jk7.apps.googleusercontent.com</string>
+			</array>
+		</dict>
+	</array>
+	<key>GIDClientID</key>
+	<string>116385274952-42f2jfnc850oqcfqkcsqg0o1s0nq8jk7.apps.googleusercontent.com</string>
+	<!-- Google Sign Setup Here -->
+
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
