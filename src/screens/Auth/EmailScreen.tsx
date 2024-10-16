@@ -1,4 +1,4 @@
-import {View, Text, ScrollView, StyleSheet} from 'react-native';
+import {View, ScrollView, StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 import CustomSafeAreaView from '../../components/CustomSafeAreaView';
 import BackButton from '../../components/BackButton';
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 10,
     width: '100%',
-    right: 0,
-    left: 20,
+    right: 10,
+    left: 10,
   },
 });
