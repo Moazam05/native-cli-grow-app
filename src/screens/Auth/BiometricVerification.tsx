@@ -7,6 +7,8 @@ import CustomSafeAreaView from '../../components/CustomSafeAreaView';
 import CustomText from '../../components/CustomText';
 import TouchableText from '../../components/TouchableText';
 import RoundOTPInput from './components/RoundOTPInput';
+import CustomNumberPad from './components/CustomNumberPad';
+import {useNavigation} from '@react-navigation/native';
 
 const initialState = ['', '', '', ''];
 
@@ -15,6 +17,8 @@ interface BiometricProp {
 }
 
 const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
+  const navigation: any = useNavigation();
+
   const [otpValues, setOtpValues] = useState(['', '', '', '']);
   const [focusedIndex, setFocusedIndex] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -57,7 +61,7 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
     });
     if (!valid) {
       setLoading(true);
-      //
+      navigation.navigate('HomeScreen');
       setOtpValues(initialState);
       setFocusedIndex(0);
       setLoading(false);
@@ -86,7 +90,9 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
           <TouchableText
             firstText="Logout"
             style={styles.logoutText}
-            // onPress={() => dispatch(Logout())}
+            onPress={() => {
+              navigation.navigate('LoginScreen');
+            }}
           />
         </View>
       </View>

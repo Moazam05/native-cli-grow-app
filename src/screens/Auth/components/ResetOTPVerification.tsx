@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {useTheme} from '@react-navigation/native';
+import {useNavigation, useTheme} from '@react-navigation/native';
 import CustomSafeAreaView from '../../../components/CustomSafeAreaView';
 import {Colors} from '../../../constants/Colors';
 import CustomText from '../../../components/CustomText';
@@ -22,10 +22,13 @@ interface pin {
 }
 
 const ResetOTPVerification: FC<pin> = ({pin}) => {
+  const {colors} = useTheme();
+  const navigation: any = useNavigation();
+
   const [loading, setLoading] = useState(false);
   const [otpError, setOtpError] = useState<string | null>(null);
   const [otp, setOtp] = useState<string>('');
-  const {colors} = useTheme();
+
   const handleVerification = async () => {
     setLoading(true);
     if (!otp) {
@@ -34,7 +37,9 @@ const ResetOTPVerification: FC<pin> = ({pin}) => {
       return;
     }
 
-    //
+    setTimeout(() => {
+      navigation.navigate('LoginScreen');
+    }, 3000);
 
     setLoading(false);
   };
@@ -60,7 +65,7 @@ const ResetOTPVerification: FC<pin> = ({pin}) => {
           </CustomText>
 
           <CustomText style={styles.subText}>
-            Enter OTP sent to +91 *****02312
+            Enter OTP sent to +92 *****02312
           </CustomText>
 
           <TextInput

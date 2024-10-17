@@ -9,6 +9,7 @@ import CustomText from '../../components/CustomText';
 import CustomNumberPad from './components/CustomNumberPad';
 import OTPInputCentered from './components/OTPInputCentered';
 import DotLoading from '../../components/DotLoading';
+import ResetOTPVerification from './components/ResetOTPVerification';
 
 const initialState = ['', '', '', ''];
 

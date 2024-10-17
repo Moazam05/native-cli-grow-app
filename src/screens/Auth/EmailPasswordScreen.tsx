@@ -33,7 +33,7 @@ const EmailPasswordScreen = ({route}: any) => {
     setLoading(true);
 
     if (validate()) {
-      //
+      navigation.navigate('AuthVerificationScreen');
     }
     setLoading(false);
   };
