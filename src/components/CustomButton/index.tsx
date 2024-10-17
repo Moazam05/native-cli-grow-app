@@ -24,6 +24,7 @@ const CustomButton: FC<CustomButtonProps> = ({
 }) => {
   const {colors} = useTheme();
   const theme = useCustomTheme();
+  // eslint-disable-next-line no-unused-vars
   const [animatedValue, setAnimatedValue] = useState(new Animated.Value(0));
 
   useEffect(() => {
@@ -63,7 +64,7 @@ const CustomButton: FC<CustomButtonProps> = ({
         },
         style,
       ]}>
-      <CustomText fontFamily={FONTS.Bold} variant="h6" style={{color: 'white'}}>
+      <CustomText fontFamily={FONTS.Bold} variant="h6" style={styles.text}>
         {text}
       </CustomText>
       {loading && (
@@ -97,6 +98,9 @@ const styles = StyleSheet.create({
     height: 2,
     backgroundColor: colorw.profit,
     width: '100%',
+  },
+  text: {
+    color: '#fff',
   },
 });
 
