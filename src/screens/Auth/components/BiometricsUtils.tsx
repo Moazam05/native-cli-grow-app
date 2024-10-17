@@ -59,6 +59,8 @@ export const loginWithBiometrics =
         payload: userID,
       });
 
+      console.log('signature', signature);
+
       if (!success) {
         throw new Error('Biometrics authentication failed!');
       }

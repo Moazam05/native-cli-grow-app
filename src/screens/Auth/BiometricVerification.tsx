@@ -9,6 +9,7 @@ import TouchableText from '../../components/TouchableText';
 import RoundOTPInput from './components/RoundOTPInput';
 import CustomNumberPad from './components/CustomNumberPad';
 import {useNavigation} from '@react-navigation/native';
+import {loginWithBiometrics} from './components/BiometricsUtils';
 
 const initialState = ['', '', '', ''];
 
@@ -43,7 +44,12 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
     }
   };
   const handleBiometricVerification = async () => {
-    //
+    const isVerified = await loginWithBiometrics('123123');
+    console.log('isVerified', isVerified);
+
+    if (isVerified) {
+      setOtpValues(['B', 'I', 'O', 'P']);
+    }
   };
 
   const handlePressCheckmark = async () => {

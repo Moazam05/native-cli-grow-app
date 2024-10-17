@@ -7,17 +7,7 @@ import CustomText from '../../../components/CustomText';
 import {FONTS} from '../../../constants/Fonts';
 import {Colors} from '../../../constants/Colors';
 import TouchableText from '../../../components/TouchableText';
-import ReactNativeBiometrics from 'react-native-biometrics';
-
-const rnBiometrics = new ReactNativeBiometrics();
-const checkBiometrics = async () => {
-  try {
-    const {biometryType} = await rnBiometrics.isSensorAvailable();
-    return biometryType;
-  } catch (error) {
-    return null;
-  }
-};
+import {checkBiometrics} from './BiometricsUtils';
 
 interface NumberPadProps {
   onPressNumber: (number: number | string) => void;
