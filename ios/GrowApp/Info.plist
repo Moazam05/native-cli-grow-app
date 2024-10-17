@@ -36,6 +36,13 @@
 	<string>116385274952-42f2jfnc850oqcfqkcsqg0o1s0nq8jk7.apps.googleusercontent.com</string>
 	<!-- Google Sign Setup Here -->
 
+	<!-- Face ID & Touch ID Biometric -->
+	<key>NSFaceIDUsageDescription</key>
+	<string>We need to sign in app</string>
+	<key>NSTouchIDUsageDescription</key>
+	<string>We need to sign in app</string>
+	<!-- Face ID & Touch ID Biometric -->
+
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
