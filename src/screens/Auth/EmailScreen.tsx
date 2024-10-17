@@ -31,8 +31,8 @@ const EmailScreen = () => {
     setLoading(true);
     setTimeout(() => {
       if (validate()) {
-        //
-        navigation.navigate('EmailOtpScreen', {email});
+        navigation.navigate('EmailPasswordScreen', {email});
+        // navigation.navigate('EmailOtpScreen', {email});
       }
       setLoading(false);
     }, 2000);

@@ -109,7 +109,7 @@ const CustomInput: React.FC<
         {rightIcon}
         {password && (
           <Icon
-            size={RFValue(12)}
+            size={RFValue(17)}
             onPress={() => {
               setHideEyeIcon(!hideEyeIcon);
             }}
