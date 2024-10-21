@@ -15,6 +15,8 @@ import TouchableText from '../../components/TouchableText';
 import {useNavigation} from '@react-navigation/native';
 import BottomText from '../../components/BottomText';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {useLoginMutation} from '../../redux/api/authApiSlice';
+import Toast from 'react-native-toast-message';
 
 const LoginScreen = () => {
   const theme = useColorScheme();
@@ -29,6 +31,49 @@ const LoginScreen = () => {
       // navigation.navigate('Home');
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  // todo: Login
+  const [login, {isLoading}] = useLoginMutation();
+
+  const LoginHandler = async () => {
+    const payload = {
+      email: 'salmanmoazam08@gmail.com',
+      password: 'Salman@4200',
+    };
+
+    try {
+      const user = await login(payload);
+
+      console.log('User:', user);
+
+      if (!user?.error) {
+        Toast.show({
+          type: 'successToast',
+          props: {
+            msg: 'Login Success',
+          },
+        });
+      }
+
+      if (user?.error) {
+        Toast.show({
+          type: 'warningToast',
+          props: {
+            msg: 'Something went wrong',
+          },
+        });
+      }
+    } catch (error) {
+      console.error('Login Type Error:', error);
+      // toast.error(error.response.data.message);
+      Toast.show({
+        type: 'warningToast',
+        props: {
+          msg: 'Something went wrong',
+        },
+      });
     }
   };
 
@@ -58,11 +103,13 @@ const LoginScreen = () => {
             signInWithGoogle();
           }}
         />
-        {/* <SocialLoginButton
+        <SocialLoginButton
           icon={<Icon name="logo-apple" size={18} color="black" />}
           text="Continue with Apple"
-          onPress={async () => {}}
-        /> */}
+          onPress={async () => {
+            LoginHandler();
+          }}
+        />
 
         <TouchableText
           firstText="Use other email ID"

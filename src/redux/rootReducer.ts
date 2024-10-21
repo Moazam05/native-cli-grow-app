@@ -1,12 +1,10 @@
-import {combineReducers} from 'redux';
+import {combineReducers} from '@reduxjs/toolkit';
 import authReducer from './auth/authSlice';
-// import themeReducer from "./reducers/themeSlice";
-// import stockReducer from "./reducers/stockSlice";
+import {apiSlice} from './api/apiSlice';
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  // theme: themeReducer,
-  // stock: stockReducer,
+  [apiSlice.reducerPath]: apiSlice.reducer,
 });
 
 export default rootReducer;
