@@ -6,6 +6,8 @@ import {useNavigation} from '@react-navigation/native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import GuidelineText from './components/GuidelineText';
+import {useSetPasswordMutation} from '../../redux/api/authApiSlice';
+import Toast from 'react-native-toast-message';
 
 const validatePasswordLength = (password: string) => {
   const regex =
@@ -18,7 +20,6 @@ const RegisterScreen = ({route}: any) => {
 
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [loading, setLoading] = useState(false);
 
   const validate = () => {
     if (!validatePasswordLength(password)) {
@@ -28,15 +29,41 @@ const RegisterScreen = ({route}: any) => {
     return true;
   };
 
-  const handleOnSubmit = async () => {
-    setLoading(true);
+  // todo: Verify OTP
+  const [settingPassword, {isLoading}] = useSetPasswordMutation();
 
+  const handleOnSubmit = async () => {
     if (validate()) {
-      setTimeout(() => {
-        navigation.navigate('PersonalDetailScreen');
-      }, 2000);
+      const payload = {
+        email: route.params.email,
+        password,
+      };
+
+      try {
+        const res = await settingPassword(payload);
+
+        if (!res?.error) {
+          navigation.navigate('PersonalDetailScreen');
+        }
+
+        if (res?.error) {
+          Toast.show({
+            type: 'warningToast',
+            props: {
+              msg: res?.error?.data?.message,
+            },
+          });
+        }
+      } catch (error) {
+        console.log('Setting Password Error', error);
+        Toast.show({
+          type: 'warningToast',
+          props: {
+            msg: 'Something went wrong',
+          },
+        });
+      }
     }
-    setLoading(false);
   };
 
   return (
@@ -74,8 +101,8 @@ const RegisterScreen = ({route}: any) => {
         />
         <CustomButton
           text="NEXT"
-          loading={loading}
-          disabled={loading}
+          loading={isLoading}
+          disabled={isLoading}
           onPress={() => {
             handleOnSubmit();
           }}
