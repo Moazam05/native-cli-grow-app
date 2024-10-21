@@ -6,7 +6,10 @@ import {useNavigation} from '@react-navigation/native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import OtpTimer from './components/OtpTimer';
-import {useVerifyOTPMutation} from '../../redux/api/authApiSlice';
+import {
+  useResendOTPMutation,
+  useVerifyOTPMutation,
+} from '../../redux/api/authApiSlice';
 import Toast from 'react-native-toast-message';
 
 const EmailOtpScreen = ({route}: any) => {
@@ -59,8 +62,44 @@ const EmailOtpScreen = ({route}: any) => {
     }
   };
 
+  // todo: Verify OTP
+  const [resendOTP] = useResendOTPMutation();
+
   const resendOTPHandler = async () => {
-    // await
+    console.log('Resend OTP');
+    const payload = {
+      email: route.params.email,
+      otp_type: 'email',
+    };
+
+    try {
+      const res = await resendOTP(payload);
+      if (!res?.error) {
+        Toast.show({
+          type: 'successToast',
+          props: {
+            msg: 'OTP sent successfully',
+          },
+        });
+      }
+
+      if (res?.error) {
+        Toast.show({
+          type: 'warningToast',
+          props: {
+            msg: res?.error?.data?.message,
+          },
+        });
+      }
+    } catch (error) {
+      console.log('OTP Error', error);
+      Toast.show({
+        type: 'warningToast',
+        props: {
+          msg: 'Something went wrong',
+        },
+      });
+    }
   };
   return (
     <CustomSafeAreaView>
