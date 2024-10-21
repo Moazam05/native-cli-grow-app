@@ -4,9 +4,18 @@ export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
     login: builder.mutation({
       query: data => {
-        console.log('data', data);
         return {
           url: 'auth/login',
+          method: 'POST',
+          body: data,
+        };
+      },
+    }),
+
+    checkEmail: builder.mutation({
+      query: data => {
+        return {
+          url: 'auth/check-email',
           method: 'POST',
           body: data,
         };
@@ -15,4 +24,4 @@ export const authApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const {useLoginMutation} = authApiSlice;
+export const {useLoginMutation, useCheckEmailMutation} = authApiSlice;

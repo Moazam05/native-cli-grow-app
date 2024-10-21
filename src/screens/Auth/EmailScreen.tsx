@@ -6,6 +6,8 @@ import CenteredLogo from './components/CenteredLogo';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
+import {useCheckEmailMutation} from '../../redux/api/authApiSlice';
+import Toast from 'react-native-toast-message';
 
 const validateEmail = (email: string) => {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -15,7 +17,6 @@ const validateEmail = (email: string) => {
 const EmailScreen = () => {
   const navigation: any = useNavigation();
 
-  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
 
@@ -27,15 +28,31 @@ const EmailScreen = () => {
     return true;
   };
 
+  // todo: Login
+  const [checkEmail, {isLoading}] = useCheckEmailMutation();
+
   const handleOnSubmit = async () => {
-    setLoading(true);
-    setTimeout(() => {
-      if (validate()) {
-        navigation.navigate('EmailPasswordScreen', {email});
-        // navigation.navigate('EmailOtpScreen', {email});
+    if (validate()) {
+      try {
+        const userExist = await checkEmail({email});
+
+        const {email_verified: EmailVerified} = userExist?.data?.data;
+
+        if (EmailVerified) {
+          navigation.navigate('EmailPasswordScreen', {email});
+        } else {
+          navigation.navigate('EmailOtpScreen', {email});
+        }
+      } catch (error) {
+        console.log('Check Email Error', error);
+        Toast.show({
+          type: 'warningToast',
+          props: {
+            msg: 'Something went wrong',
+          },
+        });
       }
-      setLoading(false);
-    }, 2000);
+    }
   };
   return (
     <CustomSafeAreaView>
@@ -64,8 +81,8 @@ const EmailScreen = () => {
       <View style={styles.bottomBtn}>
         <CustomButton
           text="NEXT"
-          loading={loading}
-          disabled={!validateEmail(email) || loading}
+          loading={isLoading}
+          disabled={!validateEmail(email) || isLoading}
           onPress={() => {
             handleOnSubmit();
           }}
