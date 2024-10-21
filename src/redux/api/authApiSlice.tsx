@@ -8,7 +8,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         return {
           url: 'auth/login',
           method: 'POST',
-          body: data.body,
+          body: data,
         };
       },
     }),

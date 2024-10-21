@@ -3,15 +3,15 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios --simulator='iPhone 15'",
+    "android": "clear && react-native run-android",
+    "ios": "clear && react-native run-ios --simulator='iPhone 15'",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
     "postinstall": "npx patch-package",
-    "android-clean": "cd android && ./gradlew clean && cd .. && npm run android",
-    "ios-clean": "cd ios && rm -rf build && xcodebuild clean && pod update && cd .. && npm run ios",
-    "pod-install": "cd ios && pod install && cd .."
+    "android-clean": "clear && cd android && ./gradlew clean && cd .. && npm run android",
+    "ios-clean": "clear && cd ios && rm -rf build && xcodebuild clean && pod update && cd .. && npm run ios",
+    "pod-install": "clear && cd ios && pod install && cd .."
   },
   "dependencies": {
     "@invertase/react-native-apple-authentication": "^2.3.0",

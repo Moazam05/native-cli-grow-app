@@ -1,14 +1,15 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {RootState} from '../store'; // Import your RootState type
-import {API_BASE_URL} from '@env';
+import {APP_API_URL} from '@env';
 
 export const apiSlice = createApi({
   reducerPath: 'api', // Unique and descriptive reducerPath
   baseQuery: fetchBaseQuery({
-    baseUrl: API_BASE_URL,
+    baseUrl: APP_API_URL,
     prepareHeaders: (headers, {getState}) => {
-      console.log('API_BASE_URL', API_BASE_URL);
+      console.log('APP_API_URL', APP_API_URL);
       const token = (getState() as RootState).auth?.user?.token || '';
+      console.log('token', token);
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
         headers.set('Content-Type', 'application/json');
