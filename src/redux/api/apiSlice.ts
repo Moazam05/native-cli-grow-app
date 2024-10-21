@@ -1,10 +1,11 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {RootState} from '../store'; // Import your RootState type
+import {API_BASE_URL} from '@env';
 
 export const apiSlice = createApi({
   reducerPath: 'api', // Unique and descriptive reducerPath
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://your-api-url.com', // Replace with your actual API base URL
+    baseUrl: API_BASE_URL,
     prepareHeaders: (headers, {getState}) => {
       const token = (getState() as RootState).user?.user?.token || '';
       if (token) {
@@ -16,7 +17,5 @@ export const apiSlice = createApi({
     },
   }),
   tagTypes: [], // Define tag types as needed for cache invalidation
-  endpoints: builder => ({
-    // Define your endpoints here
-  }),
+  endpoints: builder => ({}),
 });
