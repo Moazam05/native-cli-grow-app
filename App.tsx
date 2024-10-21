@@ -2,6 +2,8 @@ import React from 'react';
 import Navigation from './src/routes/Navigation';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {GOOGLE_WEB_CLIENT_ID, GOOGLE_IOS_CLIENT_ID} from '@env';
+import Toast from 'react-native-toast-message';
+import {toastConfig} from './src/components/ToastConfig/ToastConfig';
 
 GoogleSignin.configure({
   webClientId: GOOGLE_WEB_CLIENT_ID,
@@ -10,8 +12,17 @@ GoogleSignin.configure({
   iosClientId: GOOGLE_IOS_CLIENT_ID,
 });
 
-const App = () => {
-  return <Navigation />;
-};
+const App = () => (
+  <>
+    <Navigation />
+    <Toast
+      visibilityTime={2500}
+      config={toastConfig}
+      bottomOffset={0}
+      swipeable={false}
+      position="bottom"
+    />
+  </>
+);
 
 export default App;
