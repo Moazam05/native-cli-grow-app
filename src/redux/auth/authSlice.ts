@@ -3,19 +3,11 @@ import type {PayloadAction} from '@reduxjs/toolkit';
 import type {RootState} from '../store';
 
 interface UserState {
-  user: {
-    name?: string;
-    userId?: string;
-    email?: string;
-    login_pin_exist?: string;
-    phone_exist?: string;
-    balance?: number;
-    token?: string;
-  };
+  user: any;
 }
 
 const initialState: UserState = {
-  user: {},
+  user: null,
 };
 
 export const userSlice = createSlice({

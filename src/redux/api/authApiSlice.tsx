@@ -51,6 +51,16 @@ export const authApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
+
+    updateProfile: builder.mutation({
+      query: data => {
+        return {
+          url: 'auth/profile',
+          method: 'PUT',
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
@@ -60,4 +70,5 @@ export const {
   useVerifyOTPMutation,
   useResendOTPMutation,
   useSetPasswordMutation,
+  useUpdateProfileMutation,
 } = authApiSlice;

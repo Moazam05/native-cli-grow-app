@@ -7,8 +7,15 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: APP_API_URL,
     prepareHeaders: (headers, {getState}) => {
-      const token = (getState() as RootState).auth?.user?.token || '';
-      console.log('token', token);
+      const auth = (getState() as RootState).auth;
+      let token = auth?.user?.token;
+
+      // Since token is nested inside user object
+      if (auth && auth.user) {
+        const userData = JSON.parse(auth.user);
+        token = userData.token;
+      }
+
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
         headers.set('Content-Type', 'application/json');

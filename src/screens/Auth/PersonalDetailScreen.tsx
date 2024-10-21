@@ -9,6 +9,8 @@ import CustomDateInput from '../../components/CustomDateInput';
 import CustomRadioInput from '../../components/CustomRadioInput';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
+import {useUpdateProfileMutation} from '../../redux/api/authApiSlice';
+import Toast from 'react-native-toast-message';
 
 interface Inputs {
   name: string;
@@ -25,7 +27,6 @@ const PersonalDetailScreen = () => {
     gender: '',
   });
   const [errors, setErrors] = useState<{[key: string]: string | undefined}>({});
-  const [loading, setLoading] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
 
   const handleOnChange = (text: string, fieldName: string) => {
@@ -60,11 +61,41 @@ const PersonalDetailScreen = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  // todo: Verify OTP
+  const [updateProfile, {isLoading}] = useUpdateProfileMutation();
+
   const handleOnSubmit = async () => {
     if (validateForm()) {
-      setLoading(true);
-      navigation.navigate('PinScreen');
-      setLoading(false);
+      const payload = {
+        name: inputs.name,
+        date_of_birth: inputs.date_of_birth,
+        gender: inputs.gender,
+      };
+
+      try {
+        const res = await updateProfile(payload);
+
+        if (!res?.error) {
+          navigation.navigate('PinScreen');
+        }
+
+        if (res?.error) {
+          Toast.show({
+            type: 'warningToast',
+            props: {
+              msg: res?.error?.data?.message,
+            },
+          });
+        }
+      } catch (error) {
+        console.log('Update Profile Error', error);
+        Toast.show({
+          type: 'warningToast',
+          props: {
+            msg: 'Something went wrong',
+          },
+        });
+      }
     }
   };
 
@@ -103,7 +134,7 @@ const PersonalDetailScreen = () => {
         <CustomRadioInput
           label="GENDER"
           error={errors?.gender}
-          options={['male', 'female', 'other']}
+          options={['Male', 'Female', 'Other']}
           onSelect={(text: string) => {
             return handleOnChange(text, 'gender');
           }}
@@ -114,8 +145,8 @@ const PersonalDetailScreen = () => {
       <View style={styles.bottomBtn}>
         <CustomButton
           text="NEXT"
-          loading={loading}
-          disabled={false}
+          loading={isLoading}
+          disabled={isLoading}
           onPress={handleOnSubmit}
         />
       </View>

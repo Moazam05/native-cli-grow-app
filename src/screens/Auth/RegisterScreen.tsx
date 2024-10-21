@@ -8,6 +8,9 @@ import CustomButton from '../../components/CustomButton';
 import GuidelineText from './components/GuidelineText';
 import {useSetPasswordMutation} from '../../redux/api/authApiSlice';
 import Toast from 'react-native-toast-message';
+import {useDispatch} from 'react-redux';
+import {setUser} from '../../redux/auth/authSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const validatePasswordLength = (password: string) => {
   const regex =
@@ -17,6 +20,7 @@ const validatePasswordLength = (password: string) => {
 
 const RegisterScreen = ({route}: any) => {
   const navigation: any = useNavigation();
+  const dispatch = useDispatch();
 
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -40,9 +44,13 @@ const RegisterScreen = ({route}: any) => {
       };
 
       try {
-        const res = await settingPassword(payload);
+        const res: any = await settingPassword(payload);
+
+        // console.log('REs', res?.data);
 
         if (!res?.error) {
+          dispatch(setUser(JSON.stringify(res?.data)));
+          AsyncStorage.setItem('user', JSON.stringify(res?.data));
           navigation.navigate('PersonalDetailScreen');
         }
 
