@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
-import userReducer from './user/userSlice';
+import authReducer from './auth/authSlice';
 // import themeReducer from "./reducers/themeSlice";
 // import stockReducer from "./reducers/stockSlice";
 
 const rootReducer = combineReducers({
-  user: userReducer,
+  auth: authReducer,
   // theme: themeReducer,
   // stock: stockReducer,
 });
