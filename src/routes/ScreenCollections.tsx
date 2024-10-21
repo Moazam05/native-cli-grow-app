@@ -31,10 +31,6 @@ export const authStacks = [
     name: 'EmailOtpScreen',
     component: EmailOtpScreen,
   },
-  // {
-  //   name: 'PhoneScreen',
-  //   component: PhoneScreen,
-  // },
   {
     name: 'PinScreen',
     component: PinScreen,

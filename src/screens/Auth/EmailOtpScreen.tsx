@@ -6,26 +6,57 @@ import {useNavigation} from '@react-navigation/native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import OtpTimer from './components/OtpTimer';
+import {useVerifyOTPMutation} from '../../redux/api/authApiSlice';
+import Toast from 'react-native-toast-message';
 
 const EmailOtpScreen = ({route}: any) => {
   const navigation: any = useNavigation();
 
-  const [loading, setLoading] = useState(false);
   const [otp, setOtp] = useState('');
   const [otpError, setOtpError] = useState('');
+
+  // todo: Verify OTP
+  const [emailVerify, {isLoading}] = useVerifyOTPMutation();
 
   const handleSubmit = async () => {
     if (!otp) {
       setOtpError('Enter OTP');
       return;
     }
-    setLoading(true);
-    setTimeout(() => {
-      navigation.navigate('RegisterScreen', {
-        email: route.params.email,
+
+    const payload = {
+      email: route.params.email,
+      otp,
+      otp_type: 'email',
+      data: null,
+    };
+
+    try {
+      const user = await emailVerify(payload);
+
+      if (!user?.error) {
+        navigation.navigate('RegisterScreen', {
+          email: route.params.email,
+        });
+      }
+
+      if (user?.error) {
+        Toast.show({
+          type: 'warningToast',
+          props: {
+            msg: user?.error?.data?.message,
+          },
+        });
+      }
+    } catch (error) {
+      console.log('Check Email Error', error);
+      Toast.show({
+        type: 'warningToast',
+        props: {
+          msg: 'Something went wrong',
+        },
       });
-    }, 2000);
-    setLoading(false);
+    }
   };
 
   const resendOTPHandler = async () => {
@@ -53,7 +84,7 @@ const EmailOtpScreen = ({route}: any) => {
             console.log('HIT OTP API');
           }}
           error={otpError}
-          returnKeyType="done"
+          // returnKeyType="done"
           maxLength={6}
           keyboardType="number-pad"
           rightText={
@@ -64,8 +95,8 @@ const EmailOtpScreen = ({route}: any) => {
       <View style={styles.bottomBtn}>
         <CustomButton
           text="VERIFY EMAIL ID"
-          loading={loading}
-          disabled={loading}
+          loading={isLoading}
+          disabled={isLoading}
           onPress={() => handleSubmit()}
         />
       </View>

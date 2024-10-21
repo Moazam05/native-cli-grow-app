@@ -21,7 +21,18 @@ export const authApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
+
+    verifyOTP: builder.mutation({
+      query: data => {
+        return {
+          url: 'auth/verify-otp',
+          method: 'POST',
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
-export const {useLoginMutation, useCheckEmailMutation} = authApiSlice;
+export const {useLoginMutation, useCheckEmailMutation, useVerifyOTPMutation} =
+  authApiSlice;
