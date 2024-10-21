@@ -33,7 +33,7 @@ const RegisterScreen = ({route}: any) => {
 
     if (validate()) {
       setTimeout(() => {
-        navigation.navigate('PhoneScreen');
+        navigation.navigate('PersonalDetailScreen');
       }, 2000);
     }
     setLoading(false);

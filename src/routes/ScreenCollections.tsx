@@ -6,7 +6,7 @@ import AccountProtectedScreen from '../screens/Auth/AccountProtectedScreen';
 import PersonalDetailScreen from '../screens/Auth/PersonalDetailScreen';
 import ConfirmPinScreen from '../screens/Auth/ConfirmPinScreen';
 import RegisterScreen from '../screens/Auth/RegisterScreen';
-import PhoneScreen from '../screens/Auth/PhoneScreen';
+// import PhoneScreen from '../screens/Auth/PhoneScreen';
 import ForgotPassword from '../screens/Auth/ForgotPassword';
 import SplashScreen from '../screens/Auth/SplashScreen';
 import AuthVerificationScreen from '../screens/Auth/AuthVerificationScreen';
@@ -31,10 +31,10 @@ export const authStacks = [
     name: 'EmailOtpScreen',
     component: EmailOtpScreen,
   },
-  {
-    name: 'PhoneScreen',
-    component: PhoneScreen,
-  },
+  // {
+  //   name: 'PhoneScreen',
+  //   component: PhoneScreen,
+  // },
   {
     name: 'PinScreen',
     component: PinScreen,
