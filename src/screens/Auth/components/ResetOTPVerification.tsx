@@ -16,6 +16,10 @@ import CustomText from '../../../components/CustomText';
 import {FONTS} from '../../../constants/Fonts';
 import OtpTimer from './OtpTimer';
 import CustomButton from '../../../components/CustomButton';
+import useTypedSelector from '../../../hooks/useTypedSelector';
+import {selectedUser} from '../../../redux/auth/authSlice';
+import {useVerifyOTPMutation} from '../../../redux/api/authApiSlice';
+import Toast from 'react-native-toast-message';
 
 interface pin {
   pin: string;
@@ -24,24 +28,51 @@ interface pin {
 const ResetOTPVerification: FC<pin> = ({pin}) => {
   const {colors} = useTheme();
   const navigation: any = useNavigation();
+  const loginUser = useTypedSelector(selectedUser);
 
-  const [loading, setLoading] = useState(false);
   const [otpError, setOtpError] = useState<string | null>(null);
   const [otp, setOtp] = useState<string>('');
 
+  // todo: Verify OTP for Reset Password
+  const [resetPinVerifyOTP, {isLoading}] = useVerifyOTPMutation();
+
   const handleVerification = async () => {
-    setLoading(true);
     if (!otp) {
-      setLoading(false);
       setOtpError('Enter OTP');
       return;
     }
 
-    setTimeout(() => {
-      navigation.navigate('LoginScreen');
-    }, 3000);
+    const payload = {
+      email: loginUser?.data?.user?.email,
+      otp,
+      otp_type: 'reset_pin',
+      data: pin,
+    };
 
-    setLoading(false);
+    try {
+      const user = await resetPinVerifyOTP(payload);
+
+      if (!user?.error) {
+        navigation.navigate('LoginScreen');
+      }
+
+      if (user?.error) {
+        Toast.show({
+          type: 'warningToast',
+          props: {
+            msg: user?.error?.data?.message,
+          },
+        });
+      }
+    } catch (error) {
+      console.log('Check Email Error', error);
+      Toast.show({
+        type: 'warningToast',
+        props: {
+          msg: 'Something went wrong',
+        },
+      });
+    }
   };
 
   const handleChange = (text: string) => {
@@ -64,8 +95,9 @@ const ResetOTPVerification: FC<pin> = ({pin}) => {
             Verify Identity
           </CustomText>
 
+          <CustomText style={styles.subText}>Enter OTP sent to</CustomText>
           <CustomText style={styles.subText}>
-            Enter OTP sent to +92 *****02312
+            {loginUser?.data?.user?.email}
           </CustomText>
 
           <TextInput
@@ -91,7 +123,7 @@ const ResetOTPVerification: FC<pin> = ({pin}) => {
           <CustomButton
             text={'VERIFY'}
             onPress={handleVerification}
-            loading={loading}
+            loading={isLoading}
             disabled={false}
           />
         </View>

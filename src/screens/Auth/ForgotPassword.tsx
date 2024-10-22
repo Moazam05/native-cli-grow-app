@@ -96,7 +96,7 @@ const ForgotPassword = ({route}: any) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // todo: Resend OTP
+  // todo: Resend OTP for Reset Password
   const [resendOTP, {isLoading}] = useResendOTPMutation();
 
   const handleUpdatePassword = async () => {
@@ -138,7 +138,7 @@ const ForgotPassword = ({route}: any) => {
     }
   };
 
-  // todo: Verify OTP
+  // todo: Verify OTP for Reset Password
   const [passwordVerifyOTP, {isLoading: passwordLoading}] =
     useVerifyOTPMutation();
 

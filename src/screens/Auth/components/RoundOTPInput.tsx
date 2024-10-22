@@ -116,16 +116,16 @@ const RoundOTPInput: React.FC<RoundOTPInputProps> = ({
             ]}></Animated.View>
         ))}
       </View>
-      {error && (
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>{error}</Text>
-          <TouchableText
-            firstText="Forgot PIN?"
-            onPress={() => onForgotPin()}
-            style={{fontFamily: FONTS.Regular}}
-          />
-        </View>
-      )}
+      {/* {error && ( */}
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorText}>{error}</Text>
+        <TouchableText
+          firstText="Forgot PIN?"
+          onPress={() => onForgotPin()}
+          style={{fontFamily: FONTS.Regular}}
+        />
+      </View>
+      {/* )} */}
     </>
   );
 };

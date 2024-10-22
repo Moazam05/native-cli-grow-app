@@ -10,13 +10,18 @@ import CustomNumberPad from './components/CustomNumberPad';
 import OTPInputCentered from './components/OTPInputCentered';
 import DotLoading from '../../components/DotLoading';
 import ResetOTPVerification from './components/ResetOTPVerification';
+import {useResendOTPMutation} from '../../redux/api/authApiSlice';
+import Toast from 'react-native-toast-message';
+import useTypedSelector from '../../hooks/useTypedSelector';
+import {selectedUser} from '../../redux/auth/authSlice';
 
 const initialState = ['', '', '', ''];
 
 const ResetPin = () => {
+  const loginUser = useTypedSelector(selectedUser);
+
   const [otpValues, setOtpValues] = useState(['', '', '', '']);
   const [focusedIndex, setFocusedIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
   const [otpError, setOtpError] = useState<string | null>(null);
   const [otpVerification, setOtpVerification] = useState<boolean>(false);
 
@@ -39,24 +44,54 @@ const ResetPin = () => {
     }
   };
 
+  // todo: Resend OTP for Reset Pin
+  const [resendOTP, {isLoading}] = useResendOTPMutation();
+
   const handlePressCheckmark = async () => {
     let valid = false;
     otpValues.forEach(i => {
       if (i === '') {
         valid = true;
         setOtpError('Enter 4 Digit PIN');
-        // setOtpError("Wrong PIN Limit Reached. Try after 30 minutes.");
         setOtpValues(initialState);
         setFocusedIndex(0);
       }
     });
     if (!valid) {
-      setLoading(true);
-      //
-      setLoading(false);
-      // setOtpValues(initialState);
-      setFocusedIndex(0);
-      setOtpVerification(true);
+      const payload = {
+        email: loginUser?.data?.user?.email,
+        otp_type: 'reset_pin',
+      };
+      try {
+        const res = await resendOTP(payload);
+        if (!res?.error) {
+          setOtpVerification(true);
+
+          Toast.show({
+            type: 'successToast',
+            props: {
+              msg: 'OTP sent successfully',
+            },
+          });
+        }
+
+        if (res?.error) {
+          Toast.show({
+            type: 'warningToast',
+            props: {
+              msg: res?.error?.data?.message,
+            },
+          });
+        }
+      } catch (error) {
+        console.log('OTP Error', error);
+        Toast.show({
+          type: 'warningToast',
+          props: {
+            msg: 'Something went wrong',
+          },
+        });
+      }
     }
   };
 
@@ -78,7 +113,7 @@ const ResetPin = () => {
         <CustomText style={styles.subText}>
           Set a new PIN to keep your investments safe & secure.
         </CustomText>
-        {loading ? (
+        {isLoading ? (
           <View style={styles.dotContainer}>
             <DotLoading />
           </View>
