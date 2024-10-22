@@ -66,16 +66,17 @@ export const FnoIndexesData = [
 export const mostBoughtData = [
   {
     id: 1,
-    name: 'Vodafone Idea',
-    icon_url: 'https://logo.clearbit.com/vodafoneidea.com',
+    name: 'K-Electric',
+    icon_url: 'https://www.ke.com.pk/assets/themes/KE/images/logo.png',
     current_price: 14.12,
     price_change: +1.23,
     percentage_change: '0.22%',
   },
   {
     id: 2,
-    name: 'Tata Steel',
-    icon_url: 'https://logo.clearbit.com/tata.com',
+    name: 'Packages',
+    icon_url:
+      'https://www.packages.com.pk/wp-content/uploads/2023/04/Packages-group-2.png',
     current_price: 165.8,
     price_change: -12.4,
     percentage_change: '0.22%',
@@ -83,15 +84,15 @@ export const mostBoughtData = [
   {
     id: 3,
     icon_url: 'https://logo.clearbit.com/irctc.com',
-    name: 'Indian Railway Catering & Tourism Corporation',
+    name: 'Systems Ltd',
     current_price: 1044.12,
     price_change: +14.2,
     percentage_change: '23.21%',
   },
   {
     id: 4,
-    name: 'Zomato',
-    icon_url: 'https://logo.clearbit.com/zomato.com',
+    name: 'Food Pand',
+    icon_url: 'https://i.postimg.cc/DZvR5qsK/download.png',
     current_price: 189.12,
     price_change: +14.2,
     percentage_change: '23.21%',

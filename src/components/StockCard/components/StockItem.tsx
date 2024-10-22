@@ -73,17 +73,11 @@ const StockItem: FC<StockItemProps> = React.memo(({item}) => {
   };
 
   const renderStockDetails = (stockData: any) => {
-    // const {companyName, currentPrice, lastDayTradedPrice, iconUrl} = stockData;
-    const {current_price, name, icon_url, price_change} = stockData;
-    const priceChange = current_price - price_change;
-    const percentageChange = Math.abs(
-      (priceChange / price_change) * 100,
-    ).toFixed(2);
+    const {current_price, name, icon_url, price_change, percentage_change} =
+      stockData;
 
-    console.log('priceChange', priceChange);
-
-    const isProfit = priceChange > 0 ? Colors.profit : Colors.errorColor;
-    const isNeutral = priceChange === 0;
+    const isProfit = price_change > 0 ? Colors.profit : Colors.errorColor;
+    const isNeutral = price_change === 0;
 
     return (
       <TouchableOpacity
@@ -103,7 +97,7 @@ const StockItem: FC<StockItemProps> = React.memo(({item}) => {
             variant="h9"
             style={{color: isNeutral ? colors.text : isProfit, marginTop: 6}}
             fontFamily={FONTS.Medium}>
-            {getSignText(priceChange)} ({percentageChange}%)
+            {getSignText(price_change)} ({percentage_change}%)
           </CustomText>
         </View>
       </TouchableOpacity>
