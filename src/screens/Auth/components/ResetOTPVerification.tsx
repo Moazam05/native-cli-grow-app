@@ -18,7 +18,10 @@ import OtpTimer from './OtpTimer';
 import CustomButton from '../../../components/CustomButton';
 import useTypedSelector from '../../../hooks/useTypedSelector';
 import {selectedUser} from '../../../redux/auth/authSlice';
-import {useVerifyOTPMutation} from '../../../redux/api/authApiSlice';
+import {
+  useResendOTPMutation,
+  useVerifyOTPMutation,
+} from '../../../redux/api/authApiSlice';
 import Toast from 'react-native-toast-message';
 
 interface pin {
@@ -80,8 +83,42 @@ const ResetOTPVerification: FC<pin> = ({pin}) => {
     setOtpError(null);
   };
 
+  // todo: Resend OTP for Reset Pin
+  const [resendOTP] = useResendOTPMutation();
+
   const resendOtp = async () => {
-    //
+    const payload = {
+      email: loginUser?.data?.user?.email,
+      otp_type: 'reset_pin',
+    };
+    try {
+      const res = await resendOTP(payload);
+      if (!res?.error) {
+        Toast.show({
+          type: 'successToast',
+          props: {
+            msg: 'OTP sent successfully',
+          },
+        });
+      }
+
+      if (res?.error) {
+        Toast.show({
+          type: 'warningToast',
+          props: {
+            msg: res?.error?.data?.message,
+          },
+        });
+      }
+    } catch (error) {
+      console.log('OTP Error', error);
+      Toast.show({
+        type: 'warningToast',
+        props: {
+          msg: 'Something went wrong',
+        },
+      });
+    }
   };
   return (
     <KeyboardAvoidingView
