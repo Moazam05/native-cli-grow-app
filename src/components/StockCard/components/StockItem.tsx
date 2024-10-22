@@ -73,11 +73,14 @@ const StockItem: FC<StockItemProps> = React.memo(({item}) => {
   };
 
   const renderStockDetails = (stockData: any) => {
-    const {companyName, currentPrice, lastDayTradedPrice, iconUrl} = stockData;
-    const priceChange = currentPrice - lastDayTradedPrice;
+    // const {companyName, currentPrice, lastDayTradedPrice, iconUrl} = stockData;
+    const {current_price, name, icon_url, price_change} = stockData;
+    const priceChange = current_price - price_change;
     const percentageChange = Math.abs(
-      (priceChange / lastDayTradedPrice) * 100,
+      (priceChange / price_change) * 100,
     ).toFixed(2);
+
+    console.log('priceChange', priceChange);
 
     const isProfit = priceChange > 0 ? Colors.profit : Colors.errorColor;
     const isNeutral = priceChange === 0;
@@ -87,13 +90,13 @@ const StockItem: FC<StockItemProps> = React.memo(({item}) => {
         activeOpacity={0.6}
         onPress={handlePress}
         style={[styles.itemContainer, {borderColor: colors.border}]}>
-        <Image source={{uri: iconUrl}} style={styles.img} />
+        <Image source={{uri: icon_url}} style={styles.img} />
         <CustomText numberOfLines={1} variant="h8" fontFamily={FONTS.Medium}>
-          {companyName}
+          {name}
         </CustomText>
         <View style={styles.priceContainer}>
           <CustomText numberOfLines={1} variant="h8" fontFamily={FONTS.Medium}>
-            {formatPaisaWithCommas(currentPrice)}
+            {formatPaisaWithCommas(current_price)}
           </CustomText>
           <CustomText
             numberOfLines={1}

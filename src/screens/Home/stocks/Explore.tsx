@@ -19,6 +19,7 @@ import InfoText from '../../../components/InfoText';
 import StockCard from '../../../components/StockCard';
 import ProductAndTools from '../../../components/ProductAndTools';
 import {mostBoughtData} from '../../../constants/staticData';
+import GainerAndLoser from '../components/GainerAndLoser';
 
 interface SepratorProps {
   label: string;
@@ -54,7 +55,6 @@ const Seprator: FC<SepratorProps> = ({label, seeMore}) => {
 const Explore = () => {
   const dispatch = useDispatch();
   // const stockData = useTypedSelector(selectStocks);
-  const stockData = [];
   const [refereshing, setRefreshing] = useState(false);
   const refreshHandler = async () => {
     await fetchStocks();
@@ -85,7 +85,7 @@ const Explore = () => {
       <StockCard data={mostBoughtData} />
       <Seprator label="Product & Tools" />
       <ProductAndTools />
-      {/* <GainerAndLoser /> */}
+      <GainerAndLoser />
       <Seprator label="Top Intraday" seeMore />
       <StockCard data={mostBoughtData} />
 
