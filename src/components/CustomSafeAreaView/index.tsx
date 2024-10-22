@@ -1,5 +1,6 @@
 import {SafeAreaView, StyleSheet, View, ViewStyle} from 'react-native';
 import React, {FC, ReactNode} from 'react';
+import NoInternet from '../NoInternet';
 
 interface CustomSafeAreaViewProps {
   children: ReactNode;
@@ -12,6 +13,7 @@ const CustomSafeAreaView: FC<CustomSafeAreaViewProps> = ({children, style}) => {
       <SafeAreaView style={[styles.container, style]}>
         <View style={[styles.container, style]}>{children}</View>
       </SafeAreaView>
+      <NoInternet />
     </>
   );
 };

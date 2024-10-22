@@ -3,7 +3,6 @@ import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useCustomTheme} from '../themes/Theme';
 import {mergedStacks} from './ScreenCollections';
-import NoInternet from '../components/NoInternet';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,7 +38,6 @@ const Navigation = () => {
           );
         })}
       </Stack.Navigator>
-      <NoInternet />
     </NavigationContainer>
   );
 };
