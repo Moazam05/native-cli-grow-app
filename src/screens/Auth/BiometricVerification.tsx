@@ -169,7 +169,10 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
 
     if (result) {
       setOtpValues(['B', 'I', 'O', 'P']);
-      navigation.navigate('HomeScreen');
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'HomeScreen'}],
+      });
     }
   };
 
@@ -199,7 +202,10 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
         const setPin = await confirmLoginPin(payload);
 
         if (!setPin?.error) {
-          navigation.navigate('HomeScreen');
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'HomeScreen'}],
+          });
         }
 
         if (setPin?.error) {
@@ -209,6 +215,8 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
               msg: setPin?.error?.data?.message,
             },
           });
+          setOtpValues(initialState);
+          setFocusedIndex(0);
         }
       } catch (error) {
         console.log('Verify Login Pin Error', error);
