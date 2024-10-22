@@ -9,6 +9,11 @@ import OtpTimer from './components/OtpTimer';
 import CustomText from '../../components/CustomText';
 import GuidelineText from './components/GuidelineText';
 import CustomButton from '../../components/CustomButton';
+import {
+  useResendOTPMutation,
+  useVerifyOTPMutation,
+} from '../../redux/api/authApiSlice';
+import Toast from 'react-native-toast-message';
 
 const validatePasswordLength = (password: string) => {
   const regex =
@@ -91,19 +96,84 @@ const ForgotPassword = ({route}: any) => {
     return Object.keys(newErrors).length === 0;
   };
 
+  // todo: Resend OTP
+  const [resendOTP, {isLoading}] = useResendOTPMutation();
+
   const handleUpdatePassword = async () => {
     if (validateForm()) {
-      setLoading(true);
-      //
-      setOtpSent(true);
-      setLoading(false);
+      const payload = {
+        email: route.params.email,
+        otp_type: 'reset_password',
+      };
+      try {
+        const res = await resendOTP(payload);
+        if (!res?.error) {
+          setOtpSent(true);
+
+          Toast.show({
+            type: 'successToast',
+            props: {
+              msg: 'OTP sent successfully',
+            },
+          });
+        }
+
+        if (res?.error) {
+          Toast.show({
+            type: 'warningToast',
+            props: {
+              msg: res?.error?.data?.message,
+            },
+          });
+        }
+      } catch (error) {
+        console.log('OTP Error', error);
+        Toast.show({
+          type: 'warningToast',
+          props: {
+            msg: 'Something went wrong',
+          },
+        });
+      }
     }
   };
 
+  // todo: Verify OTP
+  const [passwordVerifyOTP, {isLoading: passwordLoading}] =
+    useVerifyOTPMutation();
+
   const verifyOtp = async () => {
-    setLoading(true);
-    navigation.navigate('LoginScreen');
-    setLoading(false);
+    const payload = {
+      email: route.params.email,
+      otp: inputs.otp,
+      otp_type: 'reset_password',
+      data: inputs.password,
+    };
+
+    try {
+      const user = await passwordVerifyOTP(payload);
+
+      if (!user?.error) {
+        navigation.navigate('LoginScreen');
+      }
+
+      if (user?.error) {
+        Toast.show({
+          type: 'warningToast',
+          props: {
+            msg: user?.error?.data?.message,
+          },
+        });
+      }
+    } catch (error) {
+      console.log('Check Email Error', error);
+      Toast.show({
+        type: 'warningToast',
+        props: {
+          msg: 'Something went wrong',
+        },
+      });
+    }
   };
 
   return (
@@ -167,8 +237,8 @@ const ForgotPassword = ({route}: any) => {
           ]}
         />
         <CustomButton
-          disabled={loading}
-          loading={loading}
+          disabled={isLoading || passwordLoading}
+          loading={isLoading || passwordLoading}
           text={otpSent ? 'UPDATE PASSWORD' : 'SEND OTP'}
           onPress={otpSent ? verifyOtp : handleUpdatePassword}
         />
