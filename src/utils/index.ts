@@ -9,5 +9,5 @@ export const getSignText = (number: number): string => {
 };
 
 export const formatPaisaWithCommas = (number: number): string => {
-  return `₹${number?.toFixed(2)?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
+  return `PKR ${number?.toFixed(2)?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
 };

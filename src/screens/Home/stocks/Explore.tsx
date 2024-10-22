@@ -89,8 +89,8 @@ const Explore = () => {
       <Seprator label="Top Intraday" seeMore />
       <StockCard data={mostBoughtData} />
 
-      <Seprator label="Stock in news" seeMore />
-      <StockCard data={mostBoughtData} />
+      {/* <Seprator label="Stock in news" seeMore />
+      <StockCard data={mostBoughtData} /> */}
       <InfoText
         data={[
           'Groww Invest Tech Pvt. Ltd.',
