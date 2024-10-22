@@ -121,32 +121,32 @@ export const Losers = [
   },
 ];
 
-export const ProductAndToolsData = [
-  {
-    id: 1,
-    name: 'F&O',
-    light_icon: <FOIcon width={RFValue(30)} height={RFValue(30)} />,
-    dark_icon: <FOIconDark width={RFValue(30)} height={RFValue(30)} />,
-  },
-  {
-    id: 2,
-    name: 'Events',
-    light_icon: <EventIcon width={RFValue(30)} height={RFValue(30)} />,
-    dark_icon: <EventIconDark width={RFValue(30)} height={RFValue(30)} />,
-  },
-  {
-    id: 3,
-    name: 'IPO',
-    light_icon: <IPOIcon width={RFValue(30)} height={RFValue(30)} />,
-    dark_icon: <IPOIconDark width={RFValue(30)} height={RFValue(30)} />,
-  },
-  {
-    id: 4,
-    name: 'All Stocks',
-    light_icon: <AllStocks width={RFValue(30)} height={RFValue(30)} />,
-    dark_icon: <AllStocksDark width={RFValue(30)} height={RFValue(30)} />,
-  },
-];
+// export const ProductAndToolsData = [
+//   {
+//     id: 1,
+//     name: 'F&O',
+//     light_icon: <FOIcon width={RFValue(30)} height={RFValue(30)} />,
+//     dark_icon: <FOIconDark width={RFValue(30)} height={RFValue(30)} />,
+//   },
+//   {
+//     id: 2,
+//     name: 'Events',
+//     light_icon: <EventIcon width={RFValue(30)} height={RFValue(30)} />,
+//     dark_icon: <EventIconDark width={RFValue(30)} height={RFValue(30)} />,
+//   },
+//   {
+//     id: 3,
+//     name: 'IPO',
+//     light_icon: <IPOIcon width={RFValue(30)} height={RFValue(30)} />,
+//     dark_icon: <IPOIconDark width={RFValue(30)} height={RFValue(30)} />,
+//   },
+//   {
+//     id: 4,
+//     name: 'All Stocks',
+//     light_icon: <AllStocks width={RFValue(30)} height={RFValue(30)} />,
+//     dark_icon: <AllStocksDark width={RFValue(30)} height={RFValue(30)} />,
+//   },
+// ];
 
 export const holdingsData = [
   {
