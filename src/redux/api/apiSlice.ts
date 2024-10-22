@@ -12,7 +12,7 @@ export const apiSlice = createApi({
 
       // Since token is nested inside user object
       if (auth && auth.user) {
-        const userData = JSON.parse(auth.user);
+        const userData = auth.user;
         token = userData.token;
       }
 
