@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export enum Colors {
   themeColor = '#00D09C',
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export enum FONTS {
   Black = 'Roboto-Black',
   Bold = 'Roboto-Bold',
