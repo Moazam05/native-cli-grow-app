@@ -8,6 +8,8 @@ import CustomText from '../../components/CustomText';
 import OTPInput from './components/OTPInput';
 import CustomNumberPad from './components/CustomNumberPad';
 import {useNavigation} from '@react-navigation/native';
+import {useConfirmLoginPinMutation} from '../../redux/api/authApiSlice';
+import Toast from 'react-native-toast-message';
 
 const ConfirmPinScreen = ({route}: any) => {
   const navigation: any = useNavigation();
@@ -35,10 +37,13 @@ const ConfirmPinScreen = ({route}: any) => {
     }
   };
 
+  // todo: Confirm Login Pin
+  const [confirmLoginPin, {isLoading}] = useConfirmLoginPinMutation();
+
   const handlePressCheckmark = async () => {
     let valid = false;
     const isNotEmpty = otpValues.map(i => {
-      if (i == '') {
+      if (i === '') {
         valid = true;
         setOtpError('Enter all PIN');
       }
@@ -52,7 +57,36 @@ const ConfirmPinScreen = ({route}: any) => {
     }
 
     if (!valid) {
-      navigation.navigate('AccountProtectedScreen');
+      const payload = {
+        login_pin: otpValues.join(''),
+      };
+
+      console.log('Payload', payload);
+
+      try {
+        const setPin = await confirmLoginPin(payload);
+
+        if (!setPin?.error) {
+          navigation.navigate('AccountProtectedScreen');
+        }
+
+        if (setPin?.error) {
+          Toast.show({
+            type: 'warningToast',
+            props: {
+              msg: setPin?.error?.data?.message,
+            },
+          });
+        }
+      } catch (error) {
+        console.log('Verify Login Pin Error', error);
+        Toast.show({
+          type: 'warningToast',
+          props: {
+            msg: 'Something went wrong',
+          },
+        });
+      }
     }
   };
 

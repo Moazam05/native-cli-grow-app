@@ -36,7 +36,7 @@ const PinScreen = () => {
     }
   };
 
-  // todo: Verify OTP
+  // todo: Set Login Pin
   const [setLoginPin, {isLoading}] = useSetLoginPinMutation();
 
   const handlePressCheckmark = async () => {
@@ -53,12 +53,8 @@ const PinScreen = () => {
         login_pin: otpValues.join(''),
       };
 
-      console.log('Payload', payload);
-
       try {
         const setPin = await setLoginPin(payload);
-
-        console.log('Set Pin', setPin);
 
         if (!setPin?.error) {
           navigation.navigate('ConfirmPinScreen', {

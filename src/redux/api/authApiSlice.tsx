@@ -64,9 +64,18 @@ export const authApiSlice = apiSlice.injectEndpoints({
 
     setLoginPin: builder.mutation({
       query: data => {
-        console.log('Data', data);
         return {
           url: 'auth/set-pin',
+          method: 'POST',
+          body: data,
+        };
+      },
+    }),
+
+    confirmLoginPin: builder.mutation({
+      query: data => {
+        return {
+          url: 'auth/verify-pin',
           method: 'POST',
           body: data,
         };
@@ -83,4 +92,5 @@ export const {
   useSetPasswordMutation,
   useUpdateProfileMutation,
   useSetLoginPinMutation,
+  useConfirmLoginPinMutation,
 } = authApiSlice;
