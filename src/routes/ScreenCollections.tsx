@@ -8,7 +8,7 @@ import ConfirmPinScreen from '../screens/Auth/ConfirmPinScreen';
 import RegisterScreen from '../screens/Auth/RegisterScreen';
 // import PhoneScreen from '../screens/Auth/PhoneScreen';
 import ForgotPassword from '../screens/Auth/ForgotPassword';
-import SplashScreen from '../screens/Auth/SplashScreen';
+import SplashScreen from '../screens/SplashScreen';
 import AuthVerificationScreen from '../screens/Auth/AuthVerificationScreen';
 import ProfileScreen from '../screens/Auth/ProfileScreen';
 import LoginScreen from '../screens/Auth/LoginScreen';
