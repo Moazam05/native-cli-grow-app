@@ -33,7 +33,7 @@ const RegisterScreen = ({route}: any) => {
     return true;
   };
 
-  // todo: Verify OTP
+  // todo: Set Password API
   const [settingPassword, {isLoading}] = useSetPasswordMutation();
 
   const handleOnSubmit = async () => {

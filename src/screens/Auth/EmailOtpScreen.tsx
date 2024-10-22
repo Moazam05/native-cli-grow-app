@@ -18,7 +18,7 @@ const EmailOtpScreen = ({route}: any) => {
   const [otp, setOtp] = useState('');
   const [otpError, setOtpError] = useState('');
 
-  // todo: Verify OTP
+  // todo: Verify OTP for Email
   const [emailVerify, {isLoading}] = useVerifyOTPMutation();
 
   const handleSubmit = async () => {
@@ -62,7 +62,7 @@ const EmailOtpScreen = ({route}: any) => {
     }
   };
 
-  // todo: Resend OTP
+  // todo: Resend OTP for Email
   const [resendOTP] = useResendOTPMutation();
 
   const resendOTPHandler = async () => {

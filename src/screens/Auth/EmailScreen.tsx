@@ -28,7 +28,7 @@ const EmailScreen = () => {
     return true;
   };
 
-  // todo: Login
+  // todo: Check Email
   const [checkEmail, {isLoading}] = useCheckEmailMutation();
 
   const handleOnSubmit = async () => {

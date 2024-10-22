@@ -61,7 +61,7 @@ const PersonalDetailScreen = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // todo: Verify OTP
+  // todo: Update Profile
   const [updateProfile, {isLoading}] = useUpdateProfileMutation();
 
   const handleOnSubmit = async () => {

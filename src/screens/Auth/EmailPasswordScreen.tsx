@@ -34,7 +34,7 @@ const EmailPasswordScreen = ({route}: any) => {
     return true;
   };
 
-  // todo: Verify OTP
+  // todo: Login API
   const [loginApi, {isLoading}] = useLoginMutation();
 
   const handleOnSubmit = async () => {
