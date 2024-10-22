@@ -16,7 +16,7 @@ const AccountProtectedScreen = () => {
     setTimeout(() => {
       navigation.reset({
         index: 0,
-        routes: [{name: 'HomeScreen'}],
+        routes: [{name: 'BottomTab'}],
       });
     }, 3000);
   }, []);

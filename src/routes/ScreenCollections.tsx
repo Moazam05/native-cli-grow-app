@@ -1,4 +1,4 @@
-import HomeScreen from '../screens/Home/HomeScreen';
+import BottomTab from '../screens/Home/BottomTab';
 import EmailPasswordScreen from '../screens/Auth/EmailPasswordScreen';
 import EmailOtpScreen from '../screens/Auth/EmailOtpScreen';
 import PinScreen from '../screens/Auth/PinScreen';
@@ -71,8 +71,8 @@ export const authStacks = [
 
 export const dashboardStack = [
   {
-    name: 'HomeScreen',
-    component: HomeScreen,
+    name: 'BottomTab',
+    component: BottomTab,
   },
 ];
 

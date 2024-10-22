@@ -171,7 +171,7 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
       setOtpValues(['B', 'I', 'O', 'P']);
       navigation.reset({
         index: 0,
-        routes: [{name: 'HomeScreen'}],
+        routes: [{name: 'BottomTab'}],
       });
     }
   };
@@ -204,7 +204,7 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
         if (!setPin?.error) {
           navigation.reset({
             index: 0,
-            routes: [{name: 'HomeScreen'}],
+            routes: [{name: 'BottomTab'}],
           });
         }
 
