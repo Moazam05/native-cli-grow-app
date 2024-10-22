@@ -7,6 +7,11 @@ import {useNavigation} from '@react-navigation/native';
 import CustomInput from '../../components/CustomInput';
 import TouchableText from '../../components/TouchableText';
 import CustomButton from '../../components/CustomButton';
+import {useLoginMutation} from '../../redux/api/authApiSlice';
+import Toast from 'react-native-toast-message';
+import {useDispatch} from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {setUser} from '../../redux/auth/authSlice';
 
 const validatePasswordLength = (password: string) => {
   const regex =
@@ -16,10 +21,10 @@ const validatePasswordLength = (password: string) => {
 
 const EmailPasswordScreen = ({route}: any) => {
   const navigation: any = useNavigation();
+  const dispatch = useDispatch();
 
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [loading, setLoading] = useState(false);
 
   const validate = () => {
     if (!validatePasswordLength(password)) {
@@ -29,13 +34,43 @@ const EmailPasswordScreen = ({route}: any) => {
     return true;
   };
 
-  const handleOnSubmit = async () => {
-    setLoading(true);
+  // todo: Verify OTP
+  const [loginApi, {isLoading}] = useLoginMutation();
 
+  const handleOnSubmit = async () => {
     if (validate()) {
-      navigation.navigate('AuthVerificationScreen');
+      const payload = {
+        email: route.params.email,
+        password,
+      };
+
+      try {
+        const user = await loginApi(payload);
+
+        if (!user?.error) {
+          navigation.navigate('AuthVerificationScreen');
+          dispatch(setUser(JSON.stringify(user?.data)));
+          AsyncStorage.setItem('user', JSON.stringify(user?.data));
+        }
+
+        if (user?.error) {
+          Toast.show({
+            type: 'warningToast',
+            props: {
+              msg: user?.error?.data?.message,
+            },
+          });
+        }
+      } catch (error) {
+        console.log('Check Email Error', error);
+        Toast.show({
+          type: 'warningToast',
+          props: {
+            msg: 'Something went wrong',
+          },
+        });
+      }
     }
-    setLoading(false);
   };
 
   return (
@@ -76,8 +111,8 @@ const EmailPasswordScreen = ({route}: any) => {
       <View style={styles.bottomBtn}>
         <CustomButton
           text="ENTER"
-          loading={loading}
-          disabled={loading}
+          loading={isLoading}
+          disabled={isLoading}
           onPress={() => {
             handleOnSubmit();
           }}
