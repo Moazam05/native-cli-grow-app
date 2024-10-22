@@ -1,3 +1,4 @@
+import React from 'react';
 import FOIcon from '../assets/images/fo.svg';
 import AllStocks from '../assets/images/allstocks.svg';
 import IPOIcon from '../assets/images/ipo.svg';
@@ -121,32 +122,56 @@ export const Losers = [
   },
 ];
 
-// export const ProductAndToolsData = [
-//   {
-//     id: 1,
-//     name: 'F&O',
-//     light_icon: <FOIcon width={RFValue(30)} height={RFValue(30)} />,
-//     dark_icon: <FOIconDark width={RFValue(30)} height={RFValue(30)} />,
-//   },
-//   {
-//     id: 2,
-//     name: 'Events',
-//     light_icon: <EventIcon width={RFValue(30)} height={RFValue(30)} />,
-//     dark_icon: <EventIconDark width={RFValue(30)} height={RFValue(30)} />,
-//   },
-//   {
-//     id: 3,
-//     name: 'IPO',
-//     light_icon: <IPOIcon width={RFValue(30)} height={RFValue(30)} />,
-//     dark_icon: <IPOIconDark width={RFValue(30)} height={RFValue(30)} />,
-//   },
-//   {
-//     id: 4,
-//     name: 'All Stocks',
-//     light_icon: <AllStocks width={RFValue(30)} height={RFValue(30)} />,
-//     dark_icon: <AllStocksDark width={RFValue(30)} height={RFValue(30)} />,
-//   },
-// ];
+export const ProductAndToolsData = [
+  {
+    id: 1,
+    name: 'F&O',
+    light_icon: React.createElement(FOIcon, {
+      width: RFValue(30),
+      height: RFValue(30),
+    }),
+    dark_icon: React.createElement(FOIconDark, {
+      width: RFValue(30),
+      height: RFValue(30),
+    }),
+  },
+  {
+    id: 2,
+    name: 'Events',
+    light_icon: React.createElement(EventIcon, {
+      width: RFValue(30),
+      height: RFValue(30),
+    }),
+    dark_icon: React.createElement(EventIconDark, {
+      width: RFValue(30),
+      height: RFValue(30),
+    }),
+  },
+  {
+    id: 3,
+    name: 'IPO',
+    light_icon: React.createElement(IPOIcon, {
+      width: RFValue(30),
+      height: RFValue(30),
+    }),
+    dark_icon: React.createElement(IPOIconDark, {
+      width: RFValue(30),
+      height: RFValue(30),
+    }),
+  },
+  {
+    id: 4,
+    name: 'All Stocks',
+    light_icon: React.createElement(AllStocks, {
+      width: RFValue(30),
+      height: RFValue(30),
+    }),
+    dark_icon: React.createElement(AllStocksDark, {
+      width: RFValue(30),
+      height: RFValue(30),
+    }),
+  },
+];
 
 export const holdingsData = [
   {

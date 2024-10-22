@@ -7,3 +7,7 @@ export const getSignText = (number: number): string => {
     ? `+${String(number?.toFixed(2))}`
     : number?.toFixed(2)?.toString();
 };
+
+export const formatPaisaWithCommas = (number: number): string => {
+  return `₹${number?.toFixed(2)?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
+};
