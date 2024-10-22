@@ -18,6 +18,7 @@ import {Colors} from '../../../constants/Colors';
 import InfoText from '../../../components/InfoText';
 import StockCard from '../../../components/StockCard';
 import ProductAndTools from '../../../components/ProductAndTools';
+import {mostBoughtData} from '../../../constants/staticData';
 
 interface SepratorProps {
   label: string;
@@ -81,15 +82,15 @@ const Explore = () => {
         />
       }>
       <Seprator label="Most bought on Groww" />
-      <StockCard data={stockData} />
+      <StockCard data={mostBoughtData} />
       <Seprator label="Product & Tools" />
       <ProductAndTools />
       {/* <GainerAndLoser /> */}
       <Seprator label="Top Intraday" seeMore />
-      <StockCard data={stockData} />
+      <StockCard data={mostBoughtData} />
 
       <Seprator label="Stock in news" seeMore />
-      <StockCard data={stockData} />
+      <StockCard data={mostBoughtData} />
       <InfoText
         data={[
           'Groww Invest Tech Pvt. Ltd.',

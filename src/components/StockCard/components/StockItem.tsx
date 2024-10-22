@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState, useCallback} from 'react';
 import {useTheme} from '@react-navigation/native';
 import {
   TouchableOpacity,
@@ -11,8 +11,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {Colors} from '../../../constants/Colors';
 import CustomText from '../../CustomText';
-import {FONTS} from '../../../constants/Fonts';
 import {formatPaisaWithCommas, getSignText} from '../../../utils';
+import {FONTS} from '../../../constants/Fonts';
 import {normalizeWidth} from '../../../utils/Scaling';
 
 type Stock = {
@@ -46,8 +46,31 @@ const subscribedSymbols = new Set<string>();
 
 const StockItem: FC<StockItemProps> = React.memo(({item}) => {
   const {colors} = useTheme();
-  //   const socketService = useWS();
+  // const socketService = useWS();
   const [stockData, setStockData] = useState<any>(null);
+
+  // useEffect(() => {
+  //   if (socketService && item?.symbol) {
+  //     if (!subscribedSymbols.has(item.symbol)) {
+  //       socketService.emit('subscribeToStocks', item.symbol);
+  //       subscribedSymbols.add(item.symbol);
+  //     }
+
+  //     socketService.on(item.symbol, data => {
+  //       setStockData(data);
+  //     });
+
+  //     return () => {
+  //       socketService.off(item.symbol);
+  //       subscribedSymbols.delete(item.symbol);
+  //     };
+  //   }
+  // }, [item.symbol, socketService]);
+  const handlePress = () => {
+    // const {tenMinTimeSeries, dayTimeSeries, ...stockWithoutTimeSeries} =
+    //   item as Stock;
+    // navigate('StockDetail', {stock: stockWithoutTimeSeries});
+  };
 
   const renderStockDetails = (stockData: any) => {
     const {companyName, currentPrice, lastDayTradedPrice, iconUrl} = stockData;
@@ -62,7 +85,7 @@ const StockItem: FC<StockItemProps> = React.memo(({item}) => {
     return (
       <TouchableOpacity
         activeOpacity={0.6}
-        // onPress={handlePress}
+        onPress={handlePress}
         style={[styles.itemContainer, {borderColor: colors.border}]}>
         <Image source={{uri: iconUrl}} style={styles.img} />
         <CustomText numberOfLines={1} variant="h8" fontFamily={FONTS.Medium}>
