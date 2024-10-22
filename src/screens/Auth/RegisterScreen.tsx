@@ -47,7 +47,7 @@ const RegisterScreen = ({route}: any) => {
         const res: any = await settingPassword(payload);
 
         if (!res?.error) {
-          dispatch(setUser(JSON.stringify(res?.data)));
+          dispatch(setUser(res?.data));
           AsyncStorage.setItem('user', JSON.stringify(res?.data));
           navigation.navigate('PersonalDetailScreen');
         }

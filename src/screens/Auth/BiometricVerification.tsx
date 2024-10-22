@@ -10,6 +10,8 @@ import RoundOTPInput from './components/RoundOTPInput';
 import CustomNumberPad from './components/CustomNumberPad';
 import {useNavigation} from '@react-navigation/native';
 import {loginWithBiometrics} from './components/BiometricsUtils';
+import useTypedSelector from '../../hooks/useTypedSelector';
+import {selectedUser} from '../../redux/auth/authSlice';
 
 const initialState = ['', '', '', ''];
 
@@ -19,6 +21,7 @@ interface BiometricProp {
 
 const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
   const navigation: any = useNavigation();
+  const loginUser = useTypedSelector(selectedUser);
 
   const [otpValues, setOtpValues] = useState(['', '', '', '']);
   const [focusedIndex, setFocusedIndex] = useState(0);
@@ -92,7 +95,9 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
           Enter Groww PIN
         </CustomText>
         <View style={styles.emailContainer}>
-          <CustomText style={styles.subText}>{/* {user?.email} */}</CustomText>
+          <CustomText style={styles.subText}>
+            {loginUser?.data?.user?.email}
+          </CustomText>
           <TouchableText
             firstText="Logout"
             style={styles.logoutText}

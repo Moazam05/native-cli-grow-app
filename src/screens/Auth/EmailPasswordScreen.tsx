@@ -49,7 +49,7 @@ const EmailPasswordScreen = ({route}: any) => {
 
         if (!user?.error) {
           navigation.navigate('AuthVerificationScreen');
-          dispatch(setUser(JSON.stringify(user?.data)));
+          dispatch(setUser(user?.data));
           AsyncStorage.setItem('user', JSON.stringify(user?.data));
         }
 
