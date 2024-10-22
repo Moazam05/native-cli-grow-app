@@ -68,7 +68,8 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
   const [uploadBiometric, {isLoading}] = useUploadBiometricMutation();
 
   // todo: Verify Biometric
-  const [verifyBiometric, {isLoading}] = useVerifyBiometricMutation();
+  const [verifyBiometric, {isLoadin: verifyLoading}] =
+    useVerifyBiometricMutation();
 
   const loginWithBiometrics = async () => {
     try {
@@ -78,17 +79,16 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
       }
       const {keysExist} = await rnBiometrics.biometricKeysExist();
 
-      if (!keysExist) {
+      console.log('keysExist', keysExist);
+
+      if (keysExist) {
         const {publicKey} = await rnBiometrics.createKeys();
-        console.log('publicKey', publicKey);
         const payload = {
           public_key: publicKey,
         };
 
         try {
           const user = await uploadBiometric(payload);
-
-          console.log('user PPPPPPPP', user);
 
           if (user?.error) {
             Toast.show({
@@ -114,8 +114,6 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
         payload: loginUser?.data?.user?._id,
       });
 
-      console.log('signature', signature);
-
       if (!success) {
         throw new Error('Biometrics authentication failed!');
       }
@@ -127,7 +125,14 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
       try {
         const userTwo = await verifyBiometric(payload);
 
-        console.log('user PPPPPPPP', userTwo);
+        if (!userTwo?.error) {
+          Toast.show({
+            type: 'successToast',
+            props: {
+              msg: 'Biometric verified successfully',
+            },
+          });
+        }
 
         if (userTwo?.error) {
           Toast.show({
@@ -146,17 +151,7 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
           },
         });
       }
-      // const res = await appAxios.post('/auth/verify-biometric', {
-      //   signature: signature,
-      // });
-      // token_storage.set(
-      //   'socket_access_token',
-      //   res.data.socket_tokens.socket_access_token,
-      // );
-      // token_storage.set(
-      //   'socket_refresh_token',
-      //   res.data.socket_tokens.socket_refresh_token,
-      // );
+
       return {msg: 'Success', result: true};
     } catch (error: any) {
       return {msg: error?.response?.data?.msg, result: false};
@@ -164,12 +159,17 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
   };
 
   const handleBiometricVerification = async () => {
-    const {msg, resut} = await loginWithBiometrics();
-    // console.log('isVerified', isVerified);
+    const {msg, result} = await loginWithBiometrics();
 
-    // if (isVerified) {
-    //   setOtpValues(['B', 'I', 'O', 'P']);
-    // }
+    if (!result) {
+      setOtpError(msg);
+      return;
+    }
+
+    if (result) {
+      setOtpValues(['B', 'I', 'O', 'P']);
+      navigation.navigate('HomeScreen');
+    }
   };
 
   const handlePressCheckmark = async () => {
