@@ -62,11 +62,10 @@ const EmailOtpScreen = ({route}: any) => {
     }
   };
 
-  // todo: Verify OTP
+  // todo: Resend OTP
   const [resendOTP] = useResendOTPMutation();
 
   const resendOTPHandler = async () => {
-    console.log('Resend OTP');
     const payload = {
       email: route.params.email,
       otp_type: 'email',

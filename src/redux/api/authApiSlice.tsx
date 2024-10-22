@@ -61,6 +61,17 @@ export const authApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
+
+    setLoginPin: builder.mutation({
+      query: data => {
+        console.log('Data', data);
+        return {
+          url: 'auth/set-pin',
+          method: 'POST',
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
@@ -71,4 +82,5 @@ export const {
   useResendOTPMutation,
   useSetPasswordMutation,
   useUpdateProfileMutation,
+  useSetLoginPinMutation,
 } = authApiSlice;
