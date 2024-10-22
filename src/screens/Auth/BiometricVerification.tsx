@@ -14,6 +14,7 @@ import useTypedSelector from '../../hooks/useTypedSelector';
 import {selectedUser} from '../../redux/auth/authSlice';
 import axios from 'axios';
 import {
+  useConfirmLoginPinMutation,
   useUploadBiometricMutation,
   useVerifyBiometricMutation,
 } from '../../redux/api/authApiSlice';
@@ -172,6 +173,10 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
     }
   };
 
+  // todo: Confirm Login Pin
+  const [confirmLoginPin, {isLoading: loginLoading}] =
+    useConfirmLoginPinMutation();
+
   const handlePressCheckmark = async () => {
     let valid = false;
     if (otpValues.join('') === 'BIOP') {
@@ -186,13 +191,38 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
       }
     });
     if (!valid) {
-      setLoading(true);
-      // navigation.navigate('HomeScreen');
-      setOtpValues(initialState);
-      setFocusedIndex(0);
-      setLoading(false);
+      const payload = {
+        login_pin: otpValues.join(''),
+      };
+
+      try {
+        const setPin = await confirmLoginPin(payload);
+
+        if (!setPin?.error) {
+          navigation.navigate('HomeScreen');
+        }
+
+        if (setPin?.error) {
+          Toast.show({
+            type: 'warningToast',
+            props: {
+              msg: setPin?.error?.data?.message,
+            },
+          });
+        }
+      } catch (error) {
+        console.log('Verify Login Pin Error', error);
+        Toast.show({
+          type: 'warningToast',
+          props: {
+            msg: 'Something went wrong',
+          },
+        });
+      }
     }
   };
+
+  console.log('otpValues', otpValues);
 
   useEffect(() => {
     const allFilled = otpValues.every(value => value !== '');
