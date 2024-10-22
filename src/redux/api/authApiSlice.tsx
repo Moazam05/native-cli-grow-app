@@ -81,6 +81,26 @@ export const authApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
+
+    uploadBiometric: builder.mutation({
+      query: data => {
+        return {
+          url: 'auth/upload-biometric',
+          method: 'POST',
+          body: data,
+        };
+      },
+    }),
+
+    verifyBiometric: builder.mutation({
+      query: data => {
+        return {
+          url: 'auth/verify-biometric',
+          method: 'POST',
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
@@ -93,4 +113,6 @@ export const {
   useUpdateProfileMutation,
   useSetLoginPinMutation,
   useConfirmLoginPinMutation,
+  useUploadBiometricMutation,
+  useVerifyBiometricMutation,
 } = authApiSlice;
