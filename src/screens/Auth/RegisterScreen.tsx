@@ -46,8 +46,6 @@ const RegisterScreen = ({route}: any) => {
       try {
         const res: any = await settingPassword(payload);
 
-        // console.log('REs', res?.data);
-
         if (!res?.error) {
           dispatch(setUser(JSON.stringify(res?.data)));
           AsyncStorage.setItem('user', JSON.stringify(res?.data));

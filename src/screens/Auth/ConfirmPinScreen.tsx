@@ -61,8 +61,6 @@ const ConfirmPinScreen = ({route}: any) => {
         login_pin: otpValues.join(''),
       };
 
-      console.log('Payload', payload);
-
       try {
         const setPin = await confirmLoginPin(payload);
 
