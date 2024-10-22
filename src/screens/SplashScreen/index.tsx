@@ -4,13 +4,20 @@ import CustomSafeAreaView from '../../components/CustomSafeAreaView';
 import LottieView from 'lottie-react-native';
 import Anim from '../../assets/animations/loader.json';
 import {useNavigation} from '@react-navigation/native';
+import useTypedSelector from '../../hooks/useTypedSelector';
+import {selectedUser} from '../../redux/auth/authSlice';
 
 const SplashScreen = () => {
   const navigate: any = useNavigation();
+  const loginUser = useTypedSelector(selectedUser);
 
   useEffect(() => {
     setTimeout(() => {
-      navigate.navigate('LoginScreen');
+      if (loginUser?.data?.user?.email) {
+        navigate.navigate('BottomTab');
+      } else {
+        navigate.navigate('LoginScreen');
+      }
     }, 2500);
   }, []);
 
