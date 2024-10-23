@@ -11,6 +11,7 @@ import {useTheme} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {RFValue} from 'react-native-responsive-fontsize';
 import CandleChart from './CandleChart';
+import {candleChartData} from '../../../constants/staticData';
 
 const height = screenHeight * 0.28;
 interface TradeChartProps {
@@ -41,7 +42,7 @@ const TradeChart: FC<TradeChartProps> = ({
             // overflow: "hidden",
           }}>
           <CandleChart
-            data={data}
+            data={candleChartData}
             width={screenWidth - 40}
             height={height - 40}
           />

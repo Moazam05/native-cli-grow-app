@@ -110,7 +110,7 @@ const StockDetail: FC = () => {
             />
           ) : (
             <TradeChart
-              data={stockSocketData?.dayTimeSeries || []}
+              data={ptData}
               onPressExpand={onPressExpandHandler}
               loading={chartDataLoading}
               color={getSignPaisa(priceChange).color}

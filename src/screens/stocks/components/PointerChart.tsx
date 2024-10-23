@@ -34,7 +34,7 @@ const PointerChart: FC<Chart> = ({height, data, color}) => {
       data={data}
       onDataChangeAnimationDuration={1200}
       hideDataPoints
-      secondaryData={ptData2}
+      // secondaryData={ptData2}
       secondaryLineConfig={{
         strokeDashArray: [5, 5],
         thickness: 1,
