@@ -11,6 +11,11 @@ import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import {useUpdateProfileMutation} from '../../redux/api/authApiSlice';
 import Toast from 'react-native-toast-message';
+import {useDispatch} from 'react-redux';
+import {selectedUser, setUser} from '../../redux/auth/authSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import useTypedSelector from '../../hooks/useTypedSelector';
+import {formatToISO} from '../../utils';
 
 interface Inputs {
   name: string;
@@ -20,6 +25,8 @@ interface Inputs {
 
 const PersonalDetailScreen = () => {
   const navigation: any = useNavigation();
+  const dispatch = useDispatch();
+  const loginUser = useTypedSelector(selectedUser);
 
   const [inputs, setInputs] = useState<Inputs>({
     name: '',
@@ -68,7 +75,7 @@ const PersonalDetailScreen = () => {
     if (validateForm()) {
       const payload = {
         name: inputs.name,
-        date_of_birth: inputs.date_of_birth,
+        date_of_birth: formatToISO(inputs.date_of_birth), // Convert to ISO format
         gender: inputs.gender,
       };
 
@@ -76,6 +83,19 @@ const PersonalDetailScreen = () => {
         const res = await updateProfile(payload);
 
         if (!res?.error) {
+          const oldUser = loginUser;
+          // Merge oldUser with the new user data from res
+          const updatedUser = {
+            ...oldUser, // Keep other properties like token, etc.
+            data: {
+              user: res?.data?.data?.user, // Update the user object with new data
+            },
+          };
+
+          dispatch(setUser(updatedUser));
+          AsyncStorage.setItem('user', JSON.stringify(updatedUser));
+
+          // Navigate to the PinScreen
           navigation.navigate('PinScreen');
         }
 

@@ -119,3 +119,28 @@ export const formatDate = (timestamp: any) => {
   const year = date.getFullYear();
   return `${day} ${month}, ${year}`;
 };
+
+export function formatToISO(dateStr: any) {
+  // Split the input date string "DD-MM-YYYY" into parts
+  const [day, month, year] = dateStr.split('-');
+
+  // Create a new Date object (Note: months are 0-indexed, so subtract 1 from month)
+  const date = new Date(year, month - 1, day);
+
+  // Get the current time to append to the date
+  const now = new Date();
+
+  // Set hours, minutes, seconds, and milliseconds from the current time
+  date.setHours(
+    now.getHours(),
+    now.getMinutes(),
+    now.getSeconds(),
+    now.getMilliseconds(),
+  );
+
+  // Convert the date to ISO format (with timezone)
+  const isoString = date.toISOString();
+
+  // Format it in the desired way (YYYY-MM-DDTHH:mm:ss.sss+00:00)
+  return isoString.replace('Z', '+00:00');
+}
