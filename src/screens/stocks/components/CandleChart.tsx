@@ -14,7 +14,11 @@ import {FONTS} from '../../../constants/Fonts';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {screenWidth} from '../../../utils/Scaling';
-import {convertUnixTimeWorklet, formatPaisaWorklet} from '../../../utils';
+import {
+  convertUnixTimeWorklet,
+  formatDate,
+  formatPaisaWorklet,
+} from '../../../utils';
 import PointerValuesGroup from './PointerValuesGroup';
 import Candle from './Candle';
 import StripLine from './StripLine';
@@ -79,8 +83,8 @@ const CandleChart: FC<{data: any[]; height: number; width: number}> = ({
     if (!value) {
       return '';
     }
-    const time = value?.time;
-    return `₹${value.close} | ${convertUnixTimeWorklet(time)}`;
+    const date = value?.timestamp;
+    return `₹${value.close} | ${formatDate(date)}`;
   };
 
   const scaleYInvert = (y: number) => {

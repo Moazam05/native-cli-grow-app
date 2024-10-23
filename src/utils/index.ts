@@ -96,3 +96,26 @@ export const formatPaisaWorklet = (number: number): string => {
     ? `---`
     : `${number?.toFixed(2)?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
 };
+
+export const formatDate = (timestamp: any) => {
+  'worklet';
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+  const date = new Date(timestamp);
+  const day = date.getDate();
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+  return `${day} ${month}, ${year}`;
+};
