@@ -9,6 +9,7 @@ import {persistor, store} from './src/redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import './src/screens/sheets/sheet';
+import {LogBox} from 'react-native';
 
 GoogleSignin.configure({
   webClientId: GOOGLE_WEB_CLIENT_ID,
@@ -16,6 +17,10 @@ GoogleSignin.configure({
   offlineAccess: false,
   iosClientId: GOOGLE_IOS_CLIENT_ID,
 });
+
+LogBox.ignoreLogs([
+  'Warning: Unknown: Support for defaultProps will be removed from memo components in a future major release. Use JavaScript default parameters instead.',
+]);
 
 const App = () => (
   <GestureHandlerRootView style={{flex: 1}}>
