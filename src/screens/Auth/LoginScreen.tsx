@@ -17,9 +17,11 @@ import BottomText from '../../components/BottomText';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {useLoginMutation} from '../../redux/api/authApiSlice';
 import Toast from 'react-native-toast-message';
+import {useCustomTheme} from '../../themes/Theme';
 
 const LoginScreen = () => {
-  const theme = useColorScheme();
+  const theme = useCustomTheme();
+  const {dark} = theme;
   const navigation: any = useNavigation();
 
   const signInWithGoogle = async () => {
@@ -88,9 +90,7 @@ const LoginScreen = () => {
         <View style={styles.imgContainer}>
           <Image
             style={styles.img}
-            source={
-              theme === 'dark' ? Images.LoginImageDark : Images.LoginImageLight
-            }
+            source={dark ? Images.LoginImageDark : Images.LoginImageLight}
           />
         </View>
 

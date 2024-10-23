@@ -13,6 +13,7 @@ import Icon2 from 'react-native-vector-icons/Ionicons';
 import {Colors} from '../../../constants/Colors';
 import CustomText from '../../../components/CustomText';
 import {FONTS} from '../../../constants/Fonts';
+import {useCustomTheme} from '../../../themes/Theme';
 
 interface OTPInputCenteredProps {
   otpValues: any;
@@ -27,7 +28,8 @@ const OTPInputCentered: React.FC<OTPInputCenteredProps> = ({
 }) => {
   const {colors} = useTheme();
   const [shakeAnimation] = useState(new Animated.Value(0));
-  const theme = useColorScheme();
+  const theme = useCustomTheme();
+  const {dark} = theme;
   useEffect(() => {
     if (error) {
       shake();
@@ -72,7 +74,7 @@ const OTPInputCentered: React.FC<OTPInputCenteredProps> = ({
                   ? Colors.errorColor
                   : otpValues[index] !== ''
                   ? Colors.profit
-                  : theme == 'dark'
+                  : dark
                   ? '#4f4e4a'
                   : '#ccc',
                 borderBottomWidth: focusedIndex === index ? 2 : 1,
