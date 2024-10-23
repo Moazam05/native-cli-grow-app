@@ -89,12 +89,11 @@ const HoldingListItem: FC<HoldingListItemProps> = ({item}) => {
         </CustomText>
       </View>
 
-      {scaledCloseValues && scaledCloseValues.length > 0 && (
-        <MiniChart
-          stockData={scaledCloseValues}
-          color={getSignPaisa(item.current - item.invested).color}
-        />
-      )}
+      <MiniChart
+        stockData={item.stockData}
+        color={getSignPaisa(item.current - item.invested).color}
+      />
+
       <View style={{alignItems: 'flex-end'}}>
         <CustomText
           variant="h8"
