@@ -5,8 +5,13 @@ import AddWatchlist from '../stocks/AddWatchlist';
 import CustomTab from './CustomTab';
 import WatchList from '../stocks/WatchList';
 import StockHeader from '../../../components/StockHeader';
+import useTypedSelector from '../../../hooks/useTypedSelector';
+import {selectedUser} from '../../../redux/auth/authSlice';
 
 const StockTab: FC = () => {
+  const loginUser = useTypedSelector(selectedUser);
+  const userName = loginUser?.data?.user?.name.split(' ')[0];
+
   const MyTabs = [
     {
       name: 'Explore',
@@ -17,7 +22,7 @@ const StockTab: FC = () => {
       component: <Holdings />,
     },
     {
-      name: "Ritik's Watchlist",
+      name: `${userName}'s Watchlist`,
       component: <WatchList />,
     },
     {
