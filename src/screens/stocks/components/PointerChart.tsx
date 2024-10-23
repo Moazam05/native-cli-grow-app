@@ -6,7 +6,11 @@ import {Colors} from '../../../constants/Colors';
 import {ptData2} from '../../../constants/staticData';
 import {screenWidth} from '../../../utils/Scaling';
 import CustomText from '../../../components/CustomText';
-import {convertUnixTimestamp, formatPaisaWithCommas} from '../../../utils';
+import {
+  convertUnixTimestamp,
+  formatPaisaWithCommas,
+  hexToRGBA,
+} from '../../../utils';
 
 interface Chart {
   height: number;
@@ -108,8 +112,7 @@ const PointerChart: FC<Chart> = ({height, data, color}) => {
                 onLayout={handleTextLayout}
                 style={{textAlign: 'center'}}
                 variant="h9">
-                {formatPaisaWithCommas(items[0]?.value)} |{' '}
-                {convertUnixTimestamp(items[0].time)}
+                {formatPaisaWithCommas(items[0]?.value)} | {items[0].date}
               </CustomText>
             </View>
           );

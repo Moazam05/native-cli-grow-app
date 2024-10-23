@@ -12,6 +12,7 @@ import TimeFrame from './components/TimeFrame';
 import DetailTab from './components/DetailTab';
 import Overview from './components/Overview';
 import FutureAndOption from './components/FutureAndOption';
+import {ptData} from '../../constants/staticData';
 
 interface ParamsType {
   stock?: any;
@@ -102,12 +103,7 @@ const StockDetail: FC = () => {
           <Details data={stockData} />
           {chartMode === 'line' ? (
             <MediumChart
-              data={stockSocketData?.tenMinTimeSeries.map(
-                ({close, time}: any) => ({
-                  value: close,
-                  time: time,
-                }),
-              )}
+              data={ptData}
               loading={chartDataLoading}
               color={getSignPaisa(priceChange).color}
               onPressExpand={onPressExpandHandler}
