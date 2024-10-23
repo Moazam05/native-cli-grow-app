@@ -198,7 +198,7 @@ export const holdingsData = [
 export const watchlistData = [
   {
     id: 1,
-    stock_name: 'Vodafone Idea',
+    stock_name: 'Food Panda',
     current_price: 14.12,
     price_change: +21.23,
     percentage_change: '0.22%',
@@ -214,7 +214,7 @@ export const watchlistData = [
   },
   {
     id: 3,
-    stock_name: 'Tata Steel',
+    stock_name: 'Pakistan Steel Mills',
     current_price: 140.12,
     price_change: -11.23,
     percentage_change: '0.23%',
@@ -238,7 +238,7 @@ export const watchlistData = [
   },
   {
     id: 6,
-    stock_name: 'Rail Vikas Nigam',
+    stock_name: 'System Ltd',
     current_price: 180.12,
     price_change: +54.23,
     percentage_change: '0.23%',
@@ -262,7 +262,7 @@ export const watchlistData = [
   },
   {
     id: 9,
-    stock_name: 'Adani Green Energy',
+    stock_name: 'Packages Ltd',
     current_price: 1220.12,
     price_change: +132.23,
     percentage_change: '0.23%',
