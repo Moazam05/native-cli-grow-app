@@ -13,7 +13,7 @@ import {useCustomTheme} from '../../themes/Theme';
 import CustomSafeAreaView from '../../components/CustomSafeAreaView';
 import UserAvatar from '../../components/UserAvatar';
 import ProfileHeader from './components/ProfileHeader';
-import {selectTheme, setTheme} from '../../redux/theme/themeSlice';
+import {setTheme} from '../../redux/theme/themeSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface ProfileItemProps {
@@ -59,13 +59,10 @@ const ProfileScreen = () => {
   const dispatch = useDispatch();
   const {colors} = useTheme();
   const theme = useCustomTheme();
-
-  const loginTheme = useTypedSelector(selectTheme);
-  console.log('loginTheme', loginTheme);
+  const {dark} = theme;
 
   const changeTheme = () => {
-    console.log('click');
-    const themeType = theme === 'dark' ? 'light' : 'dark';
+    const themeType = dark ? 'light' : 'dark';
 
     dispatch(setTheme(themeType));
     AsyncStorage.setItem('theme', themeType);
@@ -159,13 +156,13 @@ const ProfileScreen = () => {
           }}
           icon={
             <Icon
-              name={theme === 'dark' ? 'light-mode' : 'dark-mode'}
+              name={dark ? 'light-mode' : 'dark-mode'}
               size={RFValue(18)}
               style={{opacity: 0.7, marginHorizontal: 20}}
               color={colors.text}
             />
           }
-          title={theme === 'dark' ? 'Change Light' : 'Change Dark'}
+          title={dark ? 'Change Light' : 'Change Dark'}
           description="Update your theme "
         />
 
