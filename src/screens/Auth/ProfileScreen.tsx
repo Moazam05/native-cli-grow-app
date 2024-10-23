@@ -17,6 +17,7 @@ import {setTheme} from '../../redux/theme/themeSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useLogoutMutation} from '../../redux/api/authApiSlice';
 import Toast from 'react-native-toast-message';
+import ReactNativeBiometrics from 'react-native-biometrics';
 
 interface ProfileItemProps {
   icon: React.ReactNode;
@@ -56,6 +57,20 @@ const ProfileItem: FC<ProfileItemProps> = ({
   );
 };
 
+const rnBiometrics = new ReactNativeBiometrics();
+const deleteBiometricPublicKey = async () => {
+  try {
+    const {keysDeleted} = await rnBiometrics.deleteKeys();
+    if (!keysDeleted) {
+      throw new Error('Can not remove biometrics');
+    }
+    console.log(keysDeleted);
+    // remove from backend
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const ProfileScreen = () => {
   const user = useTypedSelector(selectedUser);
   const dispatch = useDispatch();
@@ -85,6 +100,7 @@ const ProfileScreen = () => {
             msg: 'Logged out successfully',
           },
         });
+        await deleteBiometricPublicKey();
         dispatch(setUser(null));
         AsyncStorage.removeItem('user');
         navigation.reset({
