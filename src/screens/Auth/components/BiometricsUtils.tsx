@@ -18,7 +18,6 @@ export const generateBiometricPublicKey = async () => {
       throw new Error('Biometric Key exists.');
     }
     const {publicKey} = await rnBiometrics.createKeys();
-    console.log('publicKey', publicKey);
     return publicKey;
   } catch (error) {
     console.log(error);
@@ -32,7 +31,6 @@ export const deleteBiometricPublicKey = async () => {
     if (!keysDeleted) {
       throw new Error('Can not remove biometrics');
     }
-    console.log(keysDeleted);
     // remove from backend
   } catch (error) {
     console.log(error);
@@ -58,8 +56,6 @@ export const loginWithBiometrics =
         promptMessage: 'Sign in',
         payload: userID,
       });
-
-      console.log('signature', signature);
 
       if (!success) {
         throw new Error('Biometrics authentication failed!');

@@ -118,9 +118,7 @@ const EmailOtpScreen = ({route}: any) => {
             setOtp(t);
             setOtpError('');
           }}
-          onSubmitEditing={() => {
-            console.log('HIT OTP API');
-          }}
+          onSubmitEditing={() => {}}
           error={otpError}
           // returnKeyType="done"
           maxLength={6}

@@ -46,8 +46,6 @@ const LoginScreen = () => {
     try {
       const user = await login(payload);
 
-      console.log('User:', user);
-
       if (!user?.error) {
         Toast.show({
           type: 'successToast',

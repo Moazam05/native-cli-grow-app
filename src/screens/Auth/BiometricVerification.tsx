@@ -12,7 +12,6 @@ import {useNavigation} from '@react-navigation/native';
 import ReactNativeBiometrics from 'react-native-biometrics';
 import useTypedSelector from '../../hooks/useTypedSelector';
 import {selectedUser} from '../../redux/auth/authSlice';
-import axios from 'axios';
 import {
   useConfirmLoginPinMutation,
   useUploadBiometricMutation,
@@ -79,8 +78,6 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
         throw new Error('Biometric not available');
       }
       const {keysExist} = await rnBiometrics.biometricKeysExist();
-
-      console.log('keysExist', keysExist);
 
       if (keysExist) {
         const {publicKey} = await rnBiometrics.createKeys();
@@ -229,8 +226,6 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
       }
     }
   };
-
-  console.log('otpValues', otpValues);
 
   useEffect(() => {
     const allFilled = otpValues.every(value => value !== '');
