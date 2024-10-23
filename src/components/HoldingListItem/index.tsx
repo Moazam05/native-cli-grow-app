@@ -79,36 +79,36 @@ const HoldingListItem: FC<HoldingListItemProps> = ({item}) => {
     <View style={[styles.container, {borderColor: colors.border}]}>
       <View style={{width: '40%'}}>
         <CustomText variant="h8" fontFamily={FONTS.Medium}>
-          {item?.stock?.companyName}
+          {item?.stock_name}
         </CustomText>
         <CustomText
           style={{opacity: 0.7, marginVertical: 5}}
           variant="h9"
           fontFamily={FONTS.Medium}>
-          {item?.quantity} shares
+          {item?.noOfShares} shares
         </CustomText>
       </View>
 
       {scaledCloseValues && scaledCloseValues.length > 0 && (
         <MiniChart
           stockData={scaledCloseValues}
-          color={getSignPaisa(isProfit).color}
+          color={getSignPaisa(item.current - item.invested).color}
         />
       )}
       <View style={{alignItems: 'flex-end'}}>
         <CustomText
           variant="h8"
           fontFamily={FONTS.Medium}
-          style={{color: getSignPaisa(isProfit).color}}>
-          {getSignPaisa(isProfit).paisa.slice(0, 1) +
-            getSignPaisa(currentValue).paisa.slice(1)}
+          style={{color: getSignPaisa(item.current - item.invested).color}}>
+          {getSignPaisa(item.current - item.invested).paisa.slice(0, 1) +
+            getSignPaisa(item.current).paisa.slice(1)}
         </CustomText>
 
         <CustomText
           style={{opacity: 0.7, marginVertical: 5}}
           variant="h9"
           fontFamily={FONTS.Medium}>
-          ({formatPaisaWithCommas(invested)})
+          ({formatPaisaWithCommas(item.invested)})
         </CustomText>
       </View>
     </View>

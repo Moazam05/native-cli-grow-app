@@ -48,10 +48,10 @@ const HoldingList: FC<HoldingProps> = ({data}) => {
         return <HoldingListItem key={index} item={item} />;
       })}
 
-      <TouchableText
+      {/* <TouchableText
         firstText="Verify holdings"
         style={styles.verifyHoldingText}
-      />
+      /> */}
     </View>
   );
 };

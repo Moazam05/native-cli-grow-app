@@ -177,7 +177,7 @@ export const ProductAndToolsData = [
 export const holdingsData = [
   {
     id: 1,
-    stock_name: 'IRFC',
+    stock_name: 'Systems Ltd',
     invested: 24000.42,
     current: 35000.12,
     noOfShares: 100,
@@ -186,7 +186,7 @@ export const holdingsData = [
   },
   {
     id: 2,
-    stock_name: 'Tata Steel',
+    stock_name: 'K-Electric',
     invested: 35000.42,
     current: 33000.12,
     noOfShares: 300,

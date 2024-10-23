@@ -5,7 +5,6 @@ import CustomText from '../../../components/CustomText';
 import {FONTS} from '../../../constants/Fonts';
 import {formatPaisaWithCommas, getSignPaisa} from '../../../utils';
 import {normalizeWidth} from '../../../utils/Scaling';
-import {holdingsData} from '../../../constants/staticData';
 
 interface HoldingProps {
   data: Record<string, any>[];
@@ -42,21 +41,21 @@ const HoldingCard: FC<HoldingProps> = React.memo(({data}) => {
   //     }
   //   }, [socketService, data]);
 
-  const totalReturns = holdingsData.reduce((acc, holding) => {
+  const totalReturns = data.reduce((acc, holding) => {
     const invested = holding.invested;
     const current = holding.current;
     return acc + (current - invested);
   }, 0);
 
-  const dayReturns = holdingsData.reduce((acc, holding) => {
+  const dayReturns = data.reduce((acc, holding) => {
     return acc + holding.dayReturn;
   }, 0);
 
-  const totalInvested = holdingsData.reduce((acc, holding) => {
+  const totalInvested = data.reduce((acc, holding) => {
     return acc + holding.invested;
   }, 0);
 
-  const totalCurrent = holdingsData.reduce((acc, holding) => {
+  const totalCurrent = data.reduce((acc, holding) => {
     return acc + holding.current;
   }, 0);
 
