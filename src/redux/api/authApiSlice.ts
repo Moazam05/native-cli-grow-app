@@ -101,6 +101,15 @@ export const authApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
+
+    logout: builder.mutation({
+      query: () => {
+        return {
+          url: 'auth/logout',
+          method: 'POST',
+        };
+      },
+    }),
   }),
 });
 
@@ -115,4 +124,5 @@ export const {
   useConfirmLoginPinMutation,
   useUploadBiometricMutation,
   useVerifyBiometricMutation,
+  useLogoutMutation,
 } = authApiSlice;

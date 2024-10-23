@@ -3,18 +3,20 @@ import React, {FC, useEffect} from 'react';
 import {FONTS} from '../../constants/Fonts';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useTheme} from '@react-navigation/native';
+import {useNavigation, useTheme} from '@react-navigation/native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useDispatch} from 'react-redux';
 import CustomText from '../../components/CustomText';
 import useTypedSelector from '../../hooks/useTypedSelector';
-import {selectedUser} from '../../redux/auth/authSlice';
+import {selectedUser, setUser} from '../../redux/auth/authSlice';
 import {useCustomTheme} from '../../themes/Theme';
 import CustomSafeAreaView from '../../components/CustomSafeAreaView';
 import UserAvatar from '../../components/UserAvatar';
 import ProfileHeader from './components/ProfileHeader';
 import {setTheme} from '../../redux/theme/themeSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useLogoutMutation} from '../../redux/api/authApiSlice';
+import Toast from 'react-native-toast-message';
 
 interface ProfileItemProps {
   icon: React.ReactNode;
@@ -57,6 +59,7 @@ const ProfileItem: FC<ProfileItemProps> = ({
 const ProfileScreen = () => {
   const user = useTypedSelector(selectedUser);
   const dispatch = useDispatch();
+  const navigation: any = useNavigation();
   const {colors} = useTheme();
   const theme = useCustomTheme();
   const {dark} = theme;
@@ -66,6 +69,47 @@ const ProfileScreen = () => {
 
     dispatch(setTheme(themeType));
     AsyncStorage.setItem('theme', themeType);
+  };
+
+  // todo: Upload Biometric
+  const [logoutApi, {isLoading}] = useLogoutMutation();
+
+  const LogoutHandler = async () => {
+    try {
+      const user: any = await logoutApi({});
+
+      if (!user?.error) {
+        Toast.show({
+          type: 'successToast',
+          props: {
+            msg: 'Logged out successfully',
+          },
+        });
+        dispatch(setUser(null));
+        AsyncStorage.removeItem('user');
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'SplashScreen'}],
+        });
+      }
+
+      if (user?.error) {
+        Toast.show({
+          type: 'warningToast',
+          props: {
+            msg: user?.error?.data?.message,
+          },
+        });
+      }
+    } catch (error) {
+      console.log('Verify Login Pin Error', error);
+      Toast.show({
+        type: 'warningToast',
+        props: {
+          msg: 'Something went wrong',
+        },
+      });
+    }
   };
 
   return (
@@ -146,11 +190,6 @@ const ProfileScreen = () => {
         />
 
         <ProfileItem
-          // onPress={async () => {
-          //   await dispatch(
-          //     toggleColorScheme(theme == 'dark' ? 'light' : 'dark'),
-          //   );
-          // }}
           onPress={() => {
             changeTheme();
           }}
@@ -167,8 +206,8 @@ const ProfileScreen = () => {
         />
 
         <ProfileItem
-          onPress={async () => {
-            // await dispatch(Logout());
+          onPress={() => {
+            LogoutHandler();
           }}
           icon={
             <Icon
