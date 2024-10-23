@@ -16,7 +16,7 @@ const Details: FC<DetailsProps> = ({data}) => {
   return (
     <View>
       <View style={styles.flexRowBetween}>
-        <Image source={{uri: data?.iconUrl}} style={styles.icon} />
+        <Image source={{uri: data?.icon_url}} style={styles.icon} />
 
         <View style={styles.flexRow}>
           <Icon name="access-alarm" color={colors.text} size={RFValue(18)} />
@@ -28,20 +28,20 @@ const Details: FC<DetailsProps> = ({data}) => {
           <Icon name="search" color={colors.text} size={RFValue(18)} />
         </View>
       </View>
-      <CustomText style={styles.nameText}>{data?.companyName}</CustomText>
+      <CustomText style={styles.nameText}>{data?.name}</CustomText>
       <View style={styles.flexRowBetween}>
         <View>
           <CustomText variant="h4" fontFamily={FONTS.Medium}>
-            {formatNumberWithCommas(data?.currentPrice)}
+            {formatNumberWithCommas(data?.current_price)}
           </CustomText>
           <CustomText
             variant="h9"
             style={{
               marginTop: 10,
-              color: getSignPaisa(data?.priceChange).color,
+              color: getSignPaisa(data?.price_change).color,
             }}
             fontFamily={FONTS.Medium}>
-            {getSignText(data?.priceChange)} ({data?.percentageChange}){'  '}
+            {getSignText(data?.price_change)} ({data?.percentage_change}){'  '}
             <CustomText
               variant="h9"
               style={{

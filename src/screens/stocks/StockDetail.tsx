@@ -93,20 +93,13 @@ const StockDetail: FC = () => {
   return (
     <CustomSafeAreaView style={styles.container}>
       <StockDetailHeader stock={stockData} isVisible={isVisible} />
+
       <ScrollView
         onScroll={handleScroll}
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}>
         <View style={[styles.subContainer, {paddingTop: 0}]}>
-          <Details
-            data={{
-              companyName: stockData?.companyName,
-              priceChange: priceChange,
-              currentPrice: stockSocketData?.currentPrice,
-              percentageChange: percentageChange,
-              iconUrl: stockData?.iconUrl,
-            }}
-          />
+          <Details data={stockData} />
           {chartMode == 'line' ? (
             <MediumChart
               data={stockSocketData?.tenMinTimeSeries.map(
