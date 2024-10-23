@@ -84,7 +84,7 @@ const CandleChart: FC<{data: any[]; height: number; width: number}> = ({
       return '';
     }
     const date = value?.timestamp;
-    return `₹${value.close} | ${formatDate(date)}`;
+    return `PKR ${value.close} | ${formatDate(date)}`;
   };
 
   const scaleYInvert = (y: number) => {

@@ -25,6 +25,8 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Colors} from '../../constants/Colors';
 import TransactionHeader from './components/TransactionHeader';
+import {formatPaisaWithCommas} from '../../utils';
+import CustomButton from '../../components/CustomButton';
 
 interface ParamsType {
   stock?: any;
@@ -258,7 +260,7 @@ const Transaction: FC = () => {
               opacity: 0.7,
             }}>
             <CustomText variant="h9">
-              Balance: {`₹${user?.balance}` || '------'}{' '}
+              Balance: {`PKR ${user?.balance}` || '------'}{' '}
             </CustomText>
             <CustomText variant="h9">
               {transaction_type == 'BUY' ? 'Required' : 'Sell Amount'}:{' '}
