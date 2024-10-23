@@ -100,7 +100,7 @@ const StockDetail: FC = () => {
         showsVerticalScrollIndicator={false}>
         <View style={[styles.subContainer, {paddingTop: 0}]}>
           <Details data={stockData} />
-          {chartMode == 'line' ? (
+          {chartMode === 'line' ? (
             <MediumChart
               data={stockSocketData?.tenMinTimeSeries.map(
                 ({close, time}: any) => ({

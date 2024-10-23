@@ -15,7 +15,7 @@ export const userPic = {
 export const FnoIndexesData = [
   {
     id: 1,
-    name: 'NIFTY 50',
+    name: 'K-Electric',
     symbol: '^NSEI',
     icon_url: 'https://www.ke.com.pk/assets/themes/KE/images/logo.png',
     current_price: 22123.12,
@@ -24,7 +24,7 @@ export const FnoIndexesData = [
   },
   {
     id: 2,
-    name: 'BANK NIFTY',
+    name: 'Packages Ltd',
     symbol: '^NSEBANK',
     icon_url:
       'https://www.packages.com.pk/wp-content/uploads/2023/04/Packages-group-2.png',
@@ -34,7 +34,7 @@ export const FnoIndexesData = [
   },
   {
     id: 3,
-    name: 'FINNIFTY',
+    name: 'System Ltd',
     symbol: '^NSEFIN',
     icon_url: 'https://logo.clearbit.com/irctc.com',
     current_price: 40500.42,
@@ -43,7 +43,7 @@ export const FnoIndexesData = [
   },
   {
     id: 4,
-    name: 'SENSEX',
+    name: 'Food Panda',
     symbol: '^BSESN',
     icon_url: 'https://i.postimg.cc/DZvR5qsK/download.png',
     current_price: 75000.24,
