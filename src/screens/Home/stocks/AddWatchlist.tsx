@@ -1,11 +1,9 @@
-import {View, Text} from 'react-native';
-import React from 'react';
+import React, {FC} from 'react';
+import {Tabs} from 'react-native-collapsible-tab-view';
 
-const AddWatchlist = () => {
+const AddWatchlist: FC = () => {
   return (
-    <View>
-      <Text>AddWatchlist</Text>
-    </View>
+    <Tabs.ScrollView showsVerticalScrollIndicator={false}></Tabs.ScrollView>
   );
 };
 

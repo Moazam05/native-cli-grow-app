@@ -7,6 +7,8 @@ import {toastConfig} from './src/components/ToastConfig/ToastConfig';
 import {Provider} from 'react-redux';
 import {persistor, store} from './src/redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import './src/screens/sheets/sheet';
 
 GoogleSignin.configure({
   webClientId: GOOGLE_WEB_CLIENT_ID,
@@ -16,7 +18,7 @@ GoogleSignin.configure({
 });
 
 const App = () => (
-  <>
+  <GestureHandlerRootView style={{flex: 1}}>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <Navigation />
@@ -29,7 +31,7 @@ const App = () => (
       swipeable={false}
       position="bottom"
     />
-  </>
+  </GestureHandlerRootView>
 );
 
 export default App;
