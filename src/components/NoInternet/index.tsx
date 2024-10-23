@@ -11,6 +11,7 @@ import CustomText from '../CustomText';
 
 const NoInternet = () => {
   const theme = useCustomTheme();
+  const {dark} = theme;
   const {colors} = useTheme();
   const [isConnected, setIsConnected] = useState(true);
 
@@ -37,10 +38,9 @@ const NoInternet = () => {
             style={[
               styles.subContainer,
               {
-                backgroundColor:
-                  theme === 'dark'
-                    ? Colors.dark_background_light
-                    : Colors.light_sub_background,
+                backgroundColor: dark
+                  ? Colors.dark_background_light
+                  : Colors.light_sub_background,
               },
             ]}>
             <Icon name="wifi-off" size={RFValue(20)} color={colors.text} />

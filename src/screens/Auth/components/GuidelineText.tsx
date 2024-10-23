@@ -13,13 +13,14 @@ interface GuidelineTextProps {
 
 const GuidelineText: FC<GuidelineTextProps> = ({text}) => {
   const theme = useCustomTheme();
+  const {dark} = theme;
   const {colors} = useTheme();
 
   return (
     <View
       style={[
         styles.container,
-        {backgroundColor: theme === 'dark' ? '#46391d' : '#fff5e0'},
+        {backgroundColor: dark ? '#46391d' : '#fff5e0'},
       ]}>
       <Icon
         name="information-circle"

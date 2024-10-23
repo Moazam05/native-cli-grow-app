@@ -50,6 +50,7 @@ const CustomDateInput: React.FC<
   const [year, setYear] = useState('');
   const [showDatePicker, setShowDatePicker] = useState(false);
   const theme = useCustomTheme();
+  const {dark} = theme;
 
   const monthInputRef = useRef<TextInput>(null);
   const yearInputRef = useRef<TextInput>(null);
@@ -121,7 +122,7 @@ const CustomDateInput: React.FC<
           <Text
             style={[
               styles.label,
-              {color: colors.text, opacity: theme === 'dark' ? 1 : 0.4},
+              {color: colors.text, opacity: dark ? 1 : 0.4},
             ]}>
             {label} {required && '*'}
           </Text>
@@ -131,7 +132,7 @@ const CustomDateInput: React.FC<
       <View style={styles.inputContainer}>
         <View style={{flexDirection: 'row', alignItems: 'center', gap: 20}}>
           <TextInput
-            placeholderTextColor={theme === 'dark' ? '#dadbde' : '#cfd0d3'}
+            placeholderTextColor={dark ? '#dadbde' : '#cfd0d3'}
             style={[
               styles.textInput,
               {
@@ -167,7 +168,7 @@ const CustomDateInput: React.FC<
           </CustomText>
           <TextInput
             ref={monthInputRef}
-            placeholderTextColor={theme === 'dark' ? '#dadbde' : '#cfd0d3'}
+            placeholderTextColor={dark ? '#dadbde' : '#cfd0d3'}
             style={[
               styles.textInput,
               {
@@ -203,7 +204,7 @@ const CustomDateInput: React.FC<
           </CustomText>
           <TextInput
             ref={yearInputRef}
-            placeholderTextColor={theme === 'dark' ? '#dadbde' : '#cfd0d3'}
+            placeholderTextColor={dark ? '#dadbde' : '#cfd0d3'}
             style={[
               styles.textInput,
               {

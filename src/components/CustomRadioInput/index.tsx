@@ -31,6 +31,8 @@ const CustomRadioInput: React.FC<
   const {colors} = useTheme();
 
   const theme = useCustomTheme();
+  const {dark} = theme;
+
   return (
     <View style={styles.inputMainContainer}>
       {label && (
@@ -38,7 +40,7 @@ const CustomRadioInput: React.FC<
           <Text
             style={[
               styles.label,
-              {color: colors.text, opacity: theme === 'dark' ? 1 : 0.4},
+              {color: colors.text, opacity: dark ? 1 : 0.4},
             ]}>
             {label}
           </Text>

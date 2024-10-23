@@ -8,7 +8,6 @@ import {
   useTheme,
 } from '@react-navigation/native';
 import WebView from 'react-native-webview';
-import {useCustomTheme} from '../../themes/Theme';
 import CustomSafeAreaView from '../../components/CustomSafeAreaView';
 import TradingViewHeader from './components/TradingViewHeader';
 import CustomButton from '../../components/CustomButton';
@@ -22,7 +21,6 @@ const TradingView: FC = () => {
   const route = useRoute<RouteProp<ParamListBase>>();
   const stockData = (route.params as ParamsType)?.stock || null;
   const {colors} = useTheme();
-  const theme = useCustomTheme();
   // const socketToken = token_storage.getString("socket_access_token");
   const [loading, setLoading] = useState(true);
   const navigation: any = useNavigation();

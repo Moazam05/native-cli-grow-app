@@ -24,6 +24,7 @@ const CustomButton: FC<CustomButtonProps> = ({
 }) => {
   const {colors} = useTheme();
   const theme = useCustomTheme();
+  const {dark} = theme;
   // eslint-disable-next-line no-unused-vars
   const [animatedValue, setAnimatedValue] = useState(new Animated.Value(0));
 
@@ -57,7 +58,7 @@ const CustomButton: FC<CustomButtonProps> = ({
         {
           backgroundColor:
             loading || disabled
-              ? theme === 'dark'
+              ? dark
                 ? colors.card
                 : '#DFDFDF'
               : colorw.profit,

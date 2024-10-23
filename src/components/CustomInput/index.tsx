@@ -53,6 +53,8 @@ const CustomInput: React.FC<
   const [isFocused, setIsFocused] = useState(false);
   const [hideEyeIcon, setHideEyeIcon] = useState(true);
   const theme = useCustomTheme();
+  const {dark} = theme;
+
   return (
     <View style={styles.inputMainContainer}>
       {label && (
@@ -60,7 +62,7 @@ const CustomInput: React.FC<
           <Text
             style={[
               styles.label,
-              {color: colors.text, opacity: theme === 'dark' ? 1 : 0.4},
+              {color: colors.text, opacity: dark ? 1 : 0.4},
             ]}>
             {label} {required && '*'}
           </Text>
@@ -84,7 +86,7 @@ const CustomInput: React.FC<
         ]}>
         {leftIcon}
         <TextInput
-          placeholderTextColor={theme === 'dark' ? '#dadbde' : '#cfd0d3'}
+          placeholderTextColor={dark ? '#dadbde' : '#cfd0d3'}
           style={[
             styles.textInput,
             {

@@ -28,6 +28,7 @@ const Holdings = () => {
   };
 
   const theme = useCustomTheme();
+  const {dark} = theme;
 
   useEffect(() => {
     fetchHoldings();
@@ -60,7 +61,7 @@ const Holdings = () => {
         <View style={styles.emptyContainer}>
           <View style={styles.imageContainer}>
             <Image
-              source={theme === 'dark' ? NoHoldingDark : NoHoldingLight}
+              source={dark ? NoHoldingDark : NoHoldingLight}
               style={styles.img}
             />
           </View>

@@ -21,6 +21,7 @@ const OTPInput: React.FC<OTPInputProps> = ({
 }) => {
   const {colors} = useTheme();
   const theme = useCustomTheme();
+  const {dark} = theme;
 
   const [shakeAnimation] = useState(new Animated.Value(0));
 
@@ -70,7 +71,7 @@ const OTPInput: React.FC<OTPInputProps> = ({
                   ? colors.text
                   : otpValues[index] !== ''
                   ? Colors.profit
-                  : theme === 'dark'
+                  : dark
                   ? '#4f4e4a'
                   : '#ccc',
                 borderWidth: focusedIndex === index ? 2 : 1,

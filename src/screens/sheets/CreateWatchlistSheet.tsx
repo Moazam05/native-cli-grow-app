@@ -11,12 +11,9 @@ import CustomText from '../../components/CustomText';
 import {FONTS} from '../../constants/Fonts';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
-import {useCustomTheme} from '../../themes/Theme';
 
 const CreateWatchlistSheet = (props: SheetProps<'create-watchlist'>) => {
   const {colors} = useTheme();
-  const theme = useCustomTheme();
-  const {dark} = theme;
 
   return (
     <ActionSheet

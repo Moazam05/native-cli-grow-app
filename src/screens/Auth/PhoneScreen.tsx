@@ -21,6 +21,7 @@ const PhoneScreen = () => {
   const navigation: any = useNavigation();
   const {colors} = useTheme();
   const theme = useCustomTheme();
+  const {dark} = theme;
 
   const [phoneNumber, setPhoneNumber] = useState('');
   const [loading, setLoading] = useState(false);
@@ -122,7 +123,7 @@ const PhoneScreen = () => {
             <View style={styles.otpTimerContainer}>
               <TouchableOpacity
                 style={{
-                  backgroundColor: theme === 'dark' ? colors.card : '#ccc',
+                  backgroundColor: dark ? colors.card : '#ccc',
                   padding: 8,
                   borderRadius: 5,
                 }}>
@@ -139,7 +140,7 @@ const PhoneScreen = () => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
-                  backgroundColor: theme === 'dark' ? colors.card : '#ccc',
+                  backgroundColor: dark ? colors.card : '#ccc',
                   padding: 8,
                   borderRadius: 5,
                 }}>
