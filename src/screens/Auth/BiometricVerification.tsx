@@ -235,8 +235,10 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
   }, [otpValues]);
 
   useEffect(() => {
-    handleBiometricVerification();
-  }, []);
+    if (loginUser) {
+      handleBiometricVerification();
+    }
+  }, [loginUser]);
   return (
     <CustomSafeAreaView>
       <View style={styles.container}>
