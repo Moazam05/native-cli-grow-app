@@ -17,8 +17,7 @@ export const FnoIndexesData = [
     id: 1,
     name: 'NIFTY 50',
     symbol: '^NSEI',
-    icon_url:
-      'https://assets-netstorage.groww.in/stock-assets/logos/GIDXNIFTY.png',
+    icon_url: 'https://www.ke.com.pk/assets/themes/KE/images/logo.png',
     current_price: 22123.12,
     price_change: +124.12,
     percentage_change: '0.22%',
@@ -28,7 +27,7 @@ export const FnoIndexesData = [
     name: 'BANK NIFTY',
     symbol: '^NSEBANK',
     icon_url:
-      'https://assets-netstorage.groww.in/stock-assets/logos/GIDXNIFTYBANK.png',
+      'https://www.packages.com.pk/wp-content/uploads/2023/04/Packages-group-2.png',
     current_price: 48500.23,
     price_change: -140.29,
     percentage_change: '0.12%',
@@ -37,8 +36,7 @@ export const FnoIndexesData = [
     id: 3,
     name: 'FINNIFTY',
     symbol: '^NSEFIN',
-    icon_url:
-      'https://assets-netstorage.groww.in/stock-assets/logos/GIDXNIFTYFIN.png',
+    icon_url: 'https://logo.clearbit.com/irctc.com',
     current_price: 40500.42,
     price_change: +224.29,
     percentage_change: '0.34%',
@@ -47,8 +45,7 @@ export const FnoIndexesData = [
     id: 4,
     name: 'SENSEX',
     symbol: '^BSESN',
-    icon_url:
-      'https://assets-netstorage.groww.in/stock-assets/logos/GIDXBSESN.png',
+    icon_url: 'https://i.postimg.cc/DZvR5qsK/download.png',
     current_price: 75000.24,
     price_change: -124.29,
     percentage_change: '0.24%',
