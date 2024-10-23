@@ -13,6 +13,10 @@ import AuthVerificationScreen from '../screens/Auth/AuthVerificationScreen';
 import ProfileScreen from '../screens/Auth/ProfileScreen';
 import LoginScreen from '../screens/Auth/LoginScreen';
 import EmailScreen from '../screens/Auth/EmailScreen';
+import StockDetail from '../screens/stocks/StockDetail';
+import TradingView from '../screens/stocks/TradingView';
+import Transaction from '../screens/stocks/Transaction';
+import TransactionSuccess from '../screens/stocks/TransactionSuccess';
 
 export const authStacks = [
   {
@@ -73,6 +77,22 @@ export const dashboardStack = [
   {
     name: 'BottomTab',
     component: BottomTab,
+  },
+  {
+    name: 'StockDetail',
+    component: StockDetail,
+  },
+  {
+    name: 'TradingView',
+    component: TradingView,
+  },
+  {
+    name: 'Transaction',
+    component: Transaction,
+  },
+  {
+    name: 'TransactionSuccess',
+    component: TransactionSuccess,
   },
 ];
 

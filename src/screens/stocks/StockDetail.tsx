@@ -44,6 +44,7 @@ const StockDetail: FC = () => {
   const route = useRoute<RouteProp<ParamListBase>>();
   // const socketService = useWS();
   const stockData = (route.params as ParamsType)?.stock || null;
+  console.log('stockData', stockData);
 
   const [stockSocketData, setSocketStockData] = useState<Stock | any>(null);
   // useEffect(() => {
@@ -91,15 +92,7 @@ const StockDetail: FC = () => {
 
   return (
     <CustomSafeAreaView style={styles.container}>
-      <StockDetailHeader
-        stock={{
-          companyName: stockData?.companyName,
-          priceChange: priceChange,
-          currentPrice: stockSocketData?.currentPrice,
-          percentageChange: percentageChange,
-        }}
-        isVisible={isVisible}
-      />
+      <StockDetailHeader stock={stockData} isVisible={isVisible} />
       <ScrollView
         onScroll={handleScroll}
         scrollEventThrottle={16}

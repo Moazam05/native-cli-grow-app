@@ -1,8 +1,8 @@
 import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import React, {FC} from 'react';
 import {useTheme} from '@react-navigation/native';
-import LineIcon from '../../assets/images/line_chart.png';
-import CandleIcon from '../../assets/images/candle_chart.png';
+import LineIcon from '../../../assets/images/line_chart.png';
+import CandleIcon from '../../../assets/images/candle_chart.png';
 import {RFValue} from 'react-native-responsive-fontsize';
 import TouchableText from '../../../components/TouchableText';
 import CustomText from '../../../components/CustomText';

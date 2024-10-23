@@ -39,7 +39,7 @@ const StockDetailHeader: FC<StockDetailProps> = ({stock, isVisible}) => {
         {isVisible && (
           <View>
             <CustomText variant="h8" fontFamily={FONTS.Medium}>
-              {stock?.companyName}
+              {stock?.name}
             </CustomText>
             <CustomText
               fontFamily={FONTS.Medium}
@@ -47,12 +47,12 @@ const StockDetailHeader: FC<StockDetailProps> = ({stock, isVisible}) => {
               style={{
                 marginTop: 4,
               }}>
-              {formatNumberWithCommas(stock?.currentPrice || 0)}{' '}
+              {formatNumberWithCommas(stock?.current_price || 0)}{' '}
               <CustomText
                 variant="h9"
                 fontFamily={FONTS.Medium}
-                style={{color: getSignPaisa(stock?.priceChange).color}}>
-                {getSignText(stock?.priceChange)} ({stock?.percentageChange}%)
+                style={{color: getSignPaisa(stock?.price_change).color}}>
+                {getSignText(stock?.price_change)} ({stock?.percentage_change}%)
               </CustomText>
             </CustomText>
           </View>
