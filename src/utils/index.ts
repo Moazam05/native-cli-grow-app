@@ -26,7 +26,7 @@ export const getSignPaisa = (number: number): signPaisaProps => {
     ?.toString();
 
   return {
-    paisa: number > 0 ? `+ ₹${paisa}` : `- ₹${paisa}`,
+    paisa: number > 0 ? `+ PKR ${paisa}` : `- PKR ${paisa}`,
     color: number > 0 ? Colors.profit : Colors.loss,
   };
 };

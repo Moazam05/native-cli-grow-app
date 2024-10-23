@@ -54,7 +54,7 @@ const Holdings = () => {
             Holdings ({holdingData.length})
           </CustomText>
           <HoldingCard data={holdingData} />
-          {/* <HoldingList data={holdingData} /> */}
+          <HoldingList data={holdingData} />
         </>
       ) : (
         <View style={styles.emptyContainer}>

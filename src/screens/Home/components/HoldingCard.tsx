@@ -5,6 +5,7 @@ import CustomText from '../../../components/CustomText';
 import {FONTS} from '../../../constants/Fonts';
 import {formatPaisaWithCommas, getSignPaisa} from '../../../utils';
 import {normalizeWidth} from '../../../utils/Scaling';
+import {holdingsData} from '../../../constants/staticData';
 
 interface HoldingProps {
   data: Record<string, any>[];
@@ -41,51 +42,31 @@ const HoldingCard: FC<HoldingProps> = React.memo(({data}) => {
   //     }
   //   }, [socketService, data]);
 
-  const updateSummary = useCallback(
-    (stocksData: any) => {
-      let totalInvested = 0;
-      let totalCurrentValue = 0;
-      let totalLastDayValue = 0;
+  const totalReturns = holdingsData.reduce((acc, holding) => {
+    const invested = holding.invested;
+    const current = holding.current;
+    return acc + (current - invested);
+  }, 0);
 
-      data.forEach(holding => {
-        const invested = holding.buyPrice * holding.quantity;
-        const stockData = stocksData.find(
-          (stock: any) => stock.symbol === holding.stock.symbol,
-        );
-        if (stockData) {
-          const currentValue = stockData.currentPrice * holding.quantity;
-          const lastDayValue =
-            invested - stockData.lastDayTradedPrice * holding.quantity;
-          totalInvested += invested;
-          totalCurrentValue += currentValue;
-          totalLastDayValue += lastDayValue;
-        }
-      });
+  const dayReturns = holdingsData.reduce((acc, holding) => {
+    return acc + holding.dayReturn;
+  }, 0);
 
-      const totalReturns = totalCurrentValue - totalInvested;
-      const oneDayReturn = totalReturns - totalLastDayValue;
+  const totalInvested = holdingsData.reduce((acc, holding) => {
+    return acc + holding.invested;
+  }, 0);
 
-      const totalReturnsPercentageChange = (
-        (totalReturns / totalInvested) *
-        100
-      ).toFixed(2);
-      const dayReturnsPercentageChange = (
-        (oneDayReturn / totalLastDayValue) *
-        100
-      ).toFixed(2);
+  const totalCurrent = holdingsData.reduce((acc, holding) => {
+    return acc + holding.current;
+  }, 0);
 
-      setSummary({
-        totalInvested,
-        totalCurrentValue,
-        totalLastDayValue,
-        totalReturns,
-        oneDayReturn,
-        totalReturnsPercentageChange,
-        dayReturnsPercentageChange,
-      });
-    },
-    [data],
-  );
+  const totalReturnsPercentageChange = Math.abs(
+    (totalReturns / totalInvested) * 100,
+  ).toFixed(2);
+
+  const dayReturnsPercentageChange = Math.abs(
+    (dayReturns / totalCurrent) * 100,
+  ).toFixed(2);
 
   return (
     <View
@@ -101,9 +82,7 @@ const HoldingCard: FC<HoldingProps> = React.memo(({data}) => {
             Current Value
           </CustomText>
           <CustomText variant="h8" style={styles.currentValueText}>
-            {summary.totalCurrentValue
-              ? formatPaisaWithCommas(summary.totalCurrentValue)
-              : '-'}
+            {totalCurrent ? formatPaisaWithCommas(totalCurrent) : '-'}
           </CustomText>
         </View>
 
@@ -118,12 +97,12 @@ const HoldingCard: FC<HoldingProps> = React.memo(({data}) => {
             variant="h8"
             style={{
               marginTop: 2,
-              color: getSignPaisa(summary.totalReturns).color,
+              color: getSignPaisa(totalReturns).color,
             }}>
-            {summary.totalReturns
-              ? `${getSignPaisa(summary.totalReturns).paisa} (${
-                  summary.totalReturnsPercentageChange
-                }%)`
+            {totalReturns
+              ? `${
+                  getSignPaisa(totalReturns).paisa
+                } (${totalReturnsPercentageChange}%)`
               : '-'}
           </CustomText>
         </View>
@@ -135,9 +114,7 @@ const HoldingCard: FC<HoldingProps> = React.memo(({data}) => {
             Invested Amount
           </CustomText>
           <CustomText variant="h8" style={styles.investedAmountText}>
-            {summary.totalInvested
-              ? formatPaisaWithCommas(summary.totalInvested)
-              : '-'}
+            {totalInvested ? formatPaisaWithCommas(totalInvested) : '-'}
           </CustomText>
         </View>
 
@@ -152,12 +129,12 @@ const HoldingCard: FC<HoldingProps> = React.memo(({data}) => {
             variant="h8"
             style={{
               marginTop: 2,
-              color: getSignPaisa(summary.oneDayReturn).color,
+              color: getSignPaisa(dayReturns).color,
             }}>
-            {summary.oneDayReturn
-              ? `${getSignPaisa(summary.oneDayReturn).paisa} (${
-                  summary.dayReturnsPercentageChange
-                }%)`
+            {dayReturns
+              ? `${
+                  getSignPaisa(dayReturns).paisa
+                } (${dayReturnsPercentageChange}%)`
               : '-'}
           </CustomText>
         </View>

@@ -37,20 +37,19 @@ const HoldingListItem: FC<HoldingListItemProps> = ({item}) => {
   const [stockSocketData, setStockSocketData] = useState<Stock | null>(null);
   //   const socketService = useWS();
 
-  // const invested = useMemo(
-  //   () => item.buyPrice * item.quantity,
-  //   [item.buyPrice, item.quantity],
-  // );
-  // const currentStockPrice =
-  //   stockSocketData?.currentPrice ?? item.stock.currentPrice;
-  // const currentValue = useMemo(
-  //   () => currentStockPrice * item.quantity,
-  //   [currentStockPrice, item.quantity],
-  // );
-  // const isProfit = useMemo(
-  //   () => currentValue - invested,
-  //   [currentValue, invested],
-  // );
+  const invested = useMemo(
+    () => item.buyPrice * item.quantity,
+    [item.buyPrice, item.quantity],
+  );
+  const currentStockPrice = 100 ?? item.stock.currentPrice;
+  const currentValue = useMemo(
+    () => currentStockPrice * item.quantity,
+    [currentStockPrice, item.quantity],
+  );
+  const isProfit = useMemo(
+    () => currentValue - invested,
+    [currentValue, invested],
+  );
 
   const scalingFactor = 0.2;
 
@@ -80,13 +79,13 @@ const HoldingListItem: FC<HoldingListItemProps> = ({item}) => {
     <View style={[styles.container, {borderColor: colors.border}]}>
       <View style={{width: '40%'}}>
         <CustomText variant="h8" fontFamily={FONTS.Medium}>
-          {item.stock.companyName}
+          {item?.stock?.companyName}
         </CustomText>
         <CustomText
           style={{opacity: 0.7, marginVertical: 5}}
           variant="h9"
           fontFamily={FONTS.Medium}>
-          {item.quantity} shares
+          {item?.quantity} shares
         </CustomText>
       </View>
 
