@@ -79,7 +79,7 @@ const BiometricVerification: FC<BiometricProp> = ({onForgotPin}) => {
       }
       const {keysExist} = await rnBiometrics.biometricKeysExist();
 
-      if (keysExist) {
+      if (!keysExist) {
         const {publicKey} = await rnBiometrics.createKeys();
         const payload = {
           public_key: publicKey,
