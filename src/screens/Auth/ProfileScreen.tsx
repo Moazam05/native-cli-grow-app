@@ -13,6 +13,8 @@ import {useCustomTheme} from '../../themes/Theme';
 import CustomSafeAreaView from '../../components/CustomSafeAreaView';
 import UserAvatar from '../../components/UserAvatar';
 import ProfileHeader from './components/ProfileHeader';
+import {selectTheme, setTheme} from '../../redux/theme/themeSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface ProfileItemProps {
   icon: React.ReactNode;
@@ -28,10 +30,7 @@ const ProfileItem: FC<ProfileItemProps> = ({
   onPress,
 }) => {
   const {colors} = useTheme();
-  const dispatch = useDispatch();
-  useEffect(() => {
-    // dispatch(refetchUser());
-  }, []);
+
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -60,6 +59,17 @@ const ProfileScreen = () => {
   const dispatch = useDispatch();
   const {colors} = useTheme();
   const theme = useCustomTheme();
+
+  const loginTheme = useTypedSelector(selectTheme);
+  console.log('loginTheme', loginTheme);
+
+  const changeTheme = () => {
+    console.log('click');
+    const themeType = theme === 'dark' ? 'light' : 'dark';
+
+    dispatch(setTheme(themeType));
+    AsyncStorage.setItem('theme', themeType);
+  };
 
   return (
     <CustomSafeAreaView style={{paddingHorizontal: 0}}>
@@ -108,7 +118,7 @@ const ProfileScreen = () => {
               color={colors.text}
             />
           }
-          title={`₹${user?.balance}`}
+          title={`PKR ${user?.data?.user?.bank_amount}`}
           description="Stocks, F&O Balance"
         />
 
@@ -139,10 +149,13 @@ const ProfileScreen = () => {
         />
 
         <ProfileItem
-          onPress={async () => {
-            // await dispatch(
-            //   toggleColorScheme(theme == 'dark' ? 'light' : 'dark'),
-            // );
+          // onPress={async () => {
+          //   await dispatch(
+          //     toggleColorScheme(theme == 'dark' ? 'light' : 'dark'),
+          //   );
+          // }}
+          onPress={() => {
+            changeTheme();
           }}
           icon={
             <Icon
