@@ -1,5 +1,5 @@
 import {View, StyleSheet} from 'react-native';
-import React, {FC, useState} from 'react';
+import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation, useTheme} from '@react-navigation/native';
@@ -33,7 +33,7 @@ const TradingViewHeader = () => {
         name="screen-rotation"
         onPress={() => {
           Orientation.unlockAllOrientations();
-          if (orientation == 'PORTRAIT') {
+          if (orientation === 'PORTRAIT') {
             Orientation.lockToLandscape();
             setOrientation('LANDSCAPE');
           } else {

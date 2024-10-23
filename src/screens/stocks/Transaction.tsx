@@ -25,7 +25,7 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Colors} from '../../constants/Colors';
 import TransactionHeader from './components/TransactionHeader';
-import {formatPaisaWithCommas} from '../../utils';
+import {formatPaisaWithCommas, hexToRGBA} from '../../utils';
 import CustomButton from '../../components/CustomButton';
 
 interface ParamsType {

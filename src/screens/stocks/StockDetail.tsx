@@ -1,7 +1,12 @@
 import {StyleSheet, ScrollView, View} from 'react-native';
 import React, {FC, useEffect, useState} from 'react';
 import Details from './Details';
-import {ParamListBase, RouteProp, useRoute} from '@react-navigation/native';
+import {
+  ParamListBase,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import {screenHeight} from '../../utils/Scaling';
 import CustomSafeAreaView from '../../components/CustomSafeAreaView';
 import {getSignPaisa} from '../../utils';
@@ -45,7 +50,7 @@ const StockDetail: FC = () => {
   const route = useRoute<RouteProp<ParamListBase>>();
   // const socketService = useWS();
   const stockData = (route.params as ParamsType)?.stock || null;
-  console.log('stockData', stockData);
+  const navigation: any = useNavigation();
 
   const [stockSocketData, setSocketStockData] = useState<Stock | any>(null);
   // useEffect(() => {
@@ -86,9 +91,7 @@ const StockDetail: FC = () => {
   };
 
   const onPressExpandHandler = () => {
-    // const { tenMinTimeSeries, dayTimeSeries, ...stockWithoutTimeSeries } =
-    //   stockData as Stock;
-    // navigate("TradingView", { stock: stockWithoutTimeSeries });
+    navigation.navigate('TradingView', {stock: stockData});
   };
 
   return (

@@ -38,7 +38,7 @@ const TradingView: FC = () => {
           right: -1,
         }}
         // FOR HAVING DEMO OF ADVANCED TRADING VIEW CHART
-        // source={{ uri: "https://charting-library.tradingview-widget.com" }}
+        source={{uri: 'https://charting-library.tradingview-widget.com'}}
         // source={{
         //   uri: `${TRADINGVIEW_WEB_URI}?theme=${theme}&stock=${stockData?.symbol}&token=${socketToken}`,
         // }}
