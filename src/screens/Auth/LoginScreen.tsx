@@ -1,23 +1,20 @@
-import {Image, StyleSheet, useColorScheme, View} from 'react-native';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
+import {Image, StyleSheet, View} from 'react-native';
+import {Images} from '../../assets/images';
+import BottomText from '../../components/BottomText';
 import CustomSafeAreaView from '../../components/CustomSafeAreaView';
 import CustomText from '../../components/CustomText';
+import SocialLoginButton from '../../components/SocialLoginButton';
+import TouchableText from '../../components/TouchableText';
 import {FONTS} from '../../constants/Fonts';
-import {Images} from '../../assets/images';
+import {useCustomTheme} from '../../themes/Theme';
 import {
   normalizeModerately,
   screenHeight,
   screenWidth,
 } from '../../utils/Scaling';
-import SocialLoginButton from '../../components/SocialLoginButton';
-import Icon from 'react-native-vector-icons/Ionicons';
-import TouchableText from '../../components/TouchableText';
-import {useNavigation} from '@react-navigation/native';
-import BottomText from '../../components/BottomText';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {useLoginMutation} from '../../redux/api/authApiSlice';
-import Toast from 'react-native-toast-message';
-import {useCustomTheme} from '../../themes/Theme';
 
 const LoginScreen = () => {
   const theme = useCustomTheme();
@@ -33,47 +30,6 @@ const LoginScreen = () => {
       // navigation.navigate('Home');
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  // todo: Login
-  const [login, {isLoading}] = useLoginMutation();
-
-  const LoginHandler = async () => {
-    const payload = {
-      email: 'salmanmoazam08@gmail.com',
-      password: 'Salman@4200',
-    };
-
-    try {
-      const user = await login(payload);
-
-      if (!user?.error) {
-        Toast.show({
-          type: 'successToast',
-          props: {
-            msg: 'Login Success',
-          },
-        });
-      }
-
-      if (user?.error) {
-        Toast.show({
-          type: 'warningToast',
-          props: {
-            msg: 'Something went wrong',
-          },
-        });
-      }
-    } catch (error) {
-      console.error('Login Type Error:', error);
-      // toast.error(error.response.data.message);
-      Toast.show({
-        type: 'warningToast',
-        props: {
-          msg: 'Something went wrong',
-        },
-      });
     }
   };
 
@@ -100,14 +56,15 @@ const LoginScreen = () => {
           onPress={async () => {
             signInWithGoogle();
           }}
+          s
         />
-        <SocialLoginButton
+        {/* <SocialLoginButton
           icon={<Icon name="logo-apple" size={18} color="black" />}
           text="Continue with Apple"
           onPress={async () => {
             LoginHandler();
           }}
-        />
+        /> */}
 
         <TouchableText
           firstText="Use other email ID"
