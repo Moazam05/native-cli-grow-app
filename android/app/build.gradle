@@ -107,7 +107,8 @@ android {
             debuggable false
             zipAlignEnabled true
         }
-    } splits {
+    } 
+    splits {
         abi {
             enable true
             reset()
