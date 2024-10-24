@@ -1,79 +1,87 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
-# Getting Started
+# GrowApp
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+GrowApp is a stock market application designed to help users monitor and track their investments efficiently. With user-friendly features and real-time updates, GrowApp aims to provide a seamless experience for both beginner and experienced investors.
 
-## Step 1: Start the Metro Server
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## Features
 
-To start Metro, run the following command from the _root_ of your React Native project:
+**User Authentication**  
+- Easily create an account with minimal information.
+- Secure login using Finger Print on Android devices or Face ID on iOS devices.
 
-```bash
-# using npm
-npm start
+**Stock Market Dashboard**  
+- View real-time data on stocks, including price changes and trends.
+- Analyze stock performance using interactive charts.
 
-# OR using Yarn
-yarn start
-```
+**Data Visualization**  
+- Get visual insights through charts powered by React Native Gifted Charts for easier stock analysis
 
-## Step 2: Start your Application
+**Theme**  
+- Light and dark mode options for an enhanced user experience.
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+**Profile Management**  
+- Update your profile details effortlessly to manage your account.
 
-### For Android
+## Tech Stack
 
-```bash
-# using npm
-npm run android
+**Client:** React Native, Redux Toolkit, Redux Persist, React Navigation
 
-# OR using Yarn
-yarn android
-```
+**Data Visualization:** React Native Gifted Charts
 
-### For iOS
+**Storage:** Async Storage
 
-```bash
-# using npm
-npm run ios
+**API Integration:** RTK Query
 
-# OR using Yarn
-yarn ios
-```
+**Additional Libraries:** React Native Gesture Handler, React Native Reanimated, React Native Toast Message, React Native Swiper
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+## Screenshots
 
-## Step 3: Modifying your App
+![Onboarding 1](https://i.postimg.cc/PxkG2N0W/1.jpg)
 
-Now that you have successfully run the app, let's modify it.
+![Onboarding 2](https://i.postimg.cc/SRyBb3Sj/2.jpg)
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+![Onboarding 3](https://i.postimg.cc/nr06F2r2/3.jpg)
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+![Login](https://i.postimg.cc/zD7mFz7h/4.jpg)
 
-## Congratulations! :tada:
+![Forgot Password](https://i.postimg.cc/6Qng2tTy/6.jpg)
 
-You've successfully run and modified your React Native App. :partying_face:
+![Sign Up](https://i.postimg.cc/fTRGHGqr/5.jpg)
 
-### Now what?
+![Splash Screen](https://i.postimg.cc/0QC4nnYv/8.jpg)
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+![Home 1](https://i.postimg.cc/TYs4tpDK/9.jpg)
 
-# Troubleshooting
+![Wishlist](https://i.postimg.cc/L8Z0w2tN/10.jpg)
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+![Search](https://i.postimg.cc/PqWVfyFD/11.jpg)
 
-# Learn More
+![Profile](https://i.postimg.cc/Bb6mg0Z5/12.jpg)
 
-To learn more about React Native, take a look at the following resources:
+![Change Password](https://i.postimg.cc/SRvD1vjB/14.jpg)
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+![Product Detail](https://i.postimg.cc/RVWPJ4D4/16.jpg)
+
+![Shopping Bag](https://i.postimg.cc/tC8BhwKP/15.jpg)
+
+![Create Address](https://i.postimg.cc/BnDMNN3z/Dark-1.jpg)
+
+![Address Listt](https://i.postimg.cc/9fh1kTFQ/Dark-2.jpg)
+
+![Checkout](https://i.postimg.cc/rpNg2mKC/Dark-3.jpg)
+
+![Payment](https://i.postimg.cc/rsK94NgQ/Dark-4.jpg)
+
+![Payment Success](https://i.postimg.cc/3NVFF0c7/Dark-5.jpg)
+
+![Payment Success](https://i.postimg.cc/9FwpF1Df/Dark-6.jpg)
+
+![Payment Success](https://i.postimg.cc/KzsPmgFL/Dark-10.jpg)
+
+![Payment Success](https://i.postimg.cc/zf8S7r0L/Dark-12.jpg)
+
+![Payment Success](https://i.postimg.cc/rpjGYPPf/Dark-13.jpg)
+
+![Payment Success](https://i.postimg.cc/0QNGgCgP/Dark-14.jpg)
